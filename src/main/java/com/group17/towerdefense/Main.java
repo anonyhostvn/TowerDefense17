@@ -21,16 +21,16 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception{
         final Canvas canvas = new Canvas(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         final GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-
-
+        final Controller controller = new Controller(graphicsContext);
 
         //Displaying the contents of the stage
         stage.setTitle(Config.GAME_NAME);
         stage.setResizable(false);
         stage.setScene(new Scene( new StackPane(canvas)));
         stage.show();
-    }
 
+        controller.start();
+    }
 
     public static void main(String[] args) {
         launch(args);
