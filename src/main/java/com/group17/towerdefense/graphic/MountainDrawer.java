@@ -1,11 +1,11 @@
 package com.group17.towerdefense.graphic;
 
+import com.group17.towerdefense.entity.title.ground.Mountain;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class MountainDrawer implements DrawerEntity {
-    public Image mountainImage = new Image(getClass().getClassLoader().getResourceAsStream("./Retina/towerDefense_tile024.png"));
+    private static Image mountainImage = new Image(Mountain.class.getResourceAsStream("/Retina/towerDefense_tile024.png"));
 
     @Override
     public void draw(GraphicsContext graphicsContext, double posX, double posY, int width, int height) {

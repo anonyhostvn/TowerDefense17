@@ -7,6 +7,7 @@ import com.group17.towerdefense.graphic.DrawerEntity;
 import com.group17.towerdefense.graphic.MountainDrawer;
 import com.group17.towerdefense.graphic.RoadDrawer;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -27,10 +28,10 @@ public class GraphicProcessor {
         for (GameEntity gameEntity: gameField.getAllGameEntity()) {
             if (gameEntity instanceof Road) {
                 RoadDrawer roadDrawer = new RoadDrawer();
-                roadDrawer.draw(graphicsContext, gameEntity.getPosY(), gameEntity.getPosX(), 100, 100);
+                roadDrawer.draw(graphicsContext, gameEntity.getPosY(), gameEntity.getPosX(), (int) gameEntity.getWidth(), (int) gameEntity.getHeight());
             } else {
                 MountainDrawer mountainDrawer = new MountainDrawer();
-                mountainDrawer.draw(graphicsContext, gameEntity.getPosY(), gameEntity.getPosX(), 100, 100);
+                mountainDrawer.draw(graphicsContext, gameEntity.getPosY(), gameEntity.getPosX(), (int) gameEntity.getWidth(), (int) gameEntity.getHeight());
             }
         }
     }

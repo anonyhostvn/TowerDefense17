@@ -2,6 +2,7 @@ package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.entity.GameEntity;
+import com.group17.towerdefense.entity.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.entity.title.ground.Mountain;
 import com.group17.towerdefense.entity.title.ground.Road;
 
@@ -22,10 +23,9 @@ public class GameField {
         for (int i = 0; i < gameStage.getHeight(); i++)
             for (int j = 0; j < gameStage.getWidth(); j++)
                 if (gameStage.getMapIn(i,j) == 0) {
-                    allGameEntity.add(new Mountain(i *  Config.SCREEN_WIDTH_RATIO, j * Config.SCREEN_HEIGHT_RATIO));
-                }
-                else {
-                    allGameEntity.add(new Road(i * Config.SCREEN_WIDTH_RATIO, j * Config.SCREEN_HEIGHT_RATIO));
+                    allGameEntity.add(new Mountain(i *  Config.SCREEN_WIDTH_RATIO, j * Config.SCREEN_HEIGHT_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
+                } else {
+                    allGameEntity.add(new Road(i * Config.SCREEN_WIDTH_RATIO, j * Config.SCREEN_HEIGHT_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
                 }
     }
 
