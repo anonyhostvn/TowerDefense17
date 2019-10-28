@@ -9,6 +9,7 @@ public abstract class AbstractEnemy implements MovableEntity {
     protected double width, height;
     protected Point position;
     protected DescartesVector vectorVelocity;
+    protected int health;
 
 
     @Override
@@ -34,5 +35,14 @@ public abstract class AbstractEnemy implements MovableEntity {
     @Override
     public double getWidth() {
         return width;
+    }
+
+    public boolean isDeath() {
+        return this.health <= 0;
+    }
+
+    public void decreaseHealth(int decHealth) {
+        this.health -= decHealth;
+        if (this.health < 0) this.health = 0;
     }
 }
