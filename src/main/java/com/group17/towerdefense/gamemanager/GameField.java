@@ -5,10 +5,12 @@ import com.group17.towerdefense.entity.GameEntity;
 import com.group17.towerdefense.entity.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.entity.title.ground.Mountain;
 import com.group17.towerdefense.entity.title.ground.Road;
+import com.group17.towerdefense.entity.title.tower.SampleTower;
 import com.group17.towerdefense.mesurement.DescartesVector;
 import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.utility.Utility;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -33,12 +35,17 @@ public class GameField {
 
         allGameEntity.add(new SampleEnemy(2, new DescartesVector(-0.2,0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()[1]), 50, 50 ));
         allGameEntity.add(new SampleEnemy(2, new DescartesVector(-0.2, 0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()[0]), 50, 50));
+        allGameEntity.add(new SampleTower(2, 2, new Point(28,10), this));
     }
 
     public void tick() {
         ticks++;
-        for (GameEntity gameEntity : allGameEntity) gameEntity.doUpdate();
-    }
+        for (GameEntity gameEntity : allGameEntity) gameEntity.doUpdate(ticks);
+
+        ArrayList<GameEntity> removeList = new ArrayList<GameEntity>();
+        for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) removeList.add(gameEntity);
+        for (GameEntity removedEntity : removeList) allGameEntity.remove(removedEntity);
+     }
 
     public void addEntity(GameEntity gameEntity) {
         allGameEntity.add(gameEntity);

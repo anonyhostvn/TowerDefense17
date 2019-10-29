@@ -5,12 +5,26 @@ import com.group17.towerdefense.mesurement.DescartesVector;
 import com.group17.towerdefense.mesurement.Point;
 
 public abstract class AbstractEnemy implements MovableEntity {
-    protected double absVelocity;
-    protected double width, height;
+    protected final double absVelocity;
+    protected final double width, height;
     protected Point position;
     protected DescartesVector vectorVelocity;
     protected int health;
 
+    private AbstractEnemy(){
+        this.absVelocity = 0;
+        this.width = 0;
+        this.height = 0;
+    };
+
+    protected AbstractEnemy(double absVelocity, double width, double height, Point position, DescartesVector vectorVelocity, int health) {
+        this.absVelocity = absVelocity;
+        this.width = width;
+        this.height = height;
+        this.position = new Point(position);
+        this.vectorVelocity = vectorVelocity;
+        this.health = health;
+    }
 
     @Override
     public double getAbsVelocity() {

@@ -24,7 +24,12 @@ public class Spawner implements GameEntity {
     }
 
     @Override
-    public void doUpdate() {
+    public void doUpdate(long tick) {
 
+    }
+
+    @Override
+    public boolean isExist() {
+        return false;
     }
 }

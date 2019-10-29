@@ -5,5 +5,6 @@ public interface GameEntity {
     double getPosY();
     double getWidth();
     double getHeight();
-    void doUpdate();
+    void doUpdate(long tick);
+    boolean isExist();
 }

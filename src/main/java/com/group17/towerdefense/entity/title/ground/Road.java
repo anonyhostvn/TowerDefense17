@@ -31,7 +31,12 @@ public class Road implements GroundEntity {
     }
 
     @Override
-    public void doUpdate() {
+    public void doUpdate(long tick) {
 
+    }
+
+    @Override
+    public boolean isExist() {
+        return true;
     }
 }
