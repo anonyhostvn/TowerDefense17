@@ -2,6 +2,15 @@ package com.group17.towerdefense.utility;
 
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.mesurement.Point;
+import com.group17.towerdefense.repositories.entity.GameEntity;
+import com.group17.towerdefense.repositories.entity.GameTile;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.transform.Rotate;
 
 public class Utility {
     public static Point fromScreenPointToFieldPoint(Point screenPoint) {
@@ -9,7 +18,20 @@ public class Utility {
     }
 
     public static Point fromFieldPointToScreenPoint(Point fieldPoint) {
-        System.out.println(fieldPoint.getX() + " " + fieldPoint.getY());
         return new Point(fieldPoint.getX() * Config.SCREEN_WIDTH_RATIO , fieldPoint.getY() * Config.SCREEN_HEIGHT_RATIO);
+    }
+
+    public static double calculateDistance(GameEntity o1, GameEntity o2) {
+        double disX = o1.getPosX() - o2.getPosX(), disY = o1.getPosY() - o2.getPosY();
+        return Math.sqrt(disX * disX + disY * disY);
+    }
+
+    public static Image rotateImage(Image img, double angle) {
+        ImageView imgView = new ImageView(img);
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+        params.setTransform(new Rotate(angle, img.getHeight() / 2, img.getWidth() / 2));
+        params.setViewport(new Rectangle2D(0, 0, img.getHeight(), img.getWidth()));
+        return imgView.snapshot(params, null);
     }
 }

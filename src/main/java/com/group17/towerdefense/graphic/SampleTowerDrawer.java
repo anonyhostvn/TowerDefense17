@@ -8,8 +8,7 @@ public class SampleTowerDrawer implements DrawerEntity {
     private static final Image guns = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile249.png"));
 
     @Override
-    public void draw(GraphicsContext graphicsContext, double posX, double posY, int width, int height) {
-        System.out.println(posX + " - " + posY + " - " + width + " - " + height);
+    public void draw(GraphicsContext graphicsContext, double posX, double posY, int width, int height, double angle) {
         graphicsContext.drawImage(under, posX, posY, width, height);
         graphicsContext.drawImage(guns, posX, posY, width, height);
     }

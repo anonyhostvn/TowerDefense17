@@ -1,18 +1,18 @@
 package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Config;
-import com.group17.towerdefense.entity.GameEntity;
-import com.group17.towerdefense.entity.movable.enemy.SampleEnemy;
-import com.group17.towerdefense.entity.title.ground.Mountain;
-import com.group17.towerdefense.entity.title.ground.Road;
-import com.group17.towerdefense.entity.title.tower.SampleTower;
+import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
+import com.group17.towerdefense.repositories.entity.GameEntity;
+import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
+import com.group17.towerdefense.gameobject.title.ground.Mountain;
+import com.group17.towerdefense.gameobject.title.ground.Road;
+import com.group17.towerdefense.gameobject.title.tower.SampleTower;
 import com.group17.towerdefense.mesurement.DescartesVector;
 import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 public class GameField {
@@ -33,14 +33,21 @@ public class GameField {
                     allGameEntity.add(new Road(j * Config.SCREEN_HEIGHT_RATIO, i * Config.SCREEN_WIDTH_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
                 }
 
-        allGameEntity.add(new SampleEnemy(2, new DescartesVector(-0.2,0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()[1]), 50, 50 ));
+        GameEntity enemy1 = new SampleEnemy(2, new DescartesVector(-0.2,0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()[1]), 50, 50 );
+        allGameEntity.add(enemy1);
         allGameEntity.add(new SampleEnemy(2, new DescartesVector(-0.2, 0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()[0]), 50, 50));
-        allGameEntity.add(new SampleTower(2, 2, new Point(28,10), this));
+        allGameEntity.add(new SampleTower(new Point(28,10), this));
     }
 
     public void tick() {
         ticks++;
-        for (GameEntity gameEntity : allGameEntity) gameEntity.doUpdate(ticks);
+        try {
+            for (GameEntity gameEntity : allGameEntity) {
+                gameEntity.doUpdate(ticks);
+            }
+        } catch(Exception e) {
+            System.out.println(allGameEntity.size());
+        }
 
         ArrayList<GameEntity> removeList = new ArrayList<GameEntity>();
         for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) removeList.add(gameEntity);

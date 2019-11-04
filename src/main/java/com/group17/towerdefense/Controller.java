@@ -41,7 +41,7 @@ public class Controller extends AnimationTimer {
     }
 
     public void start() {
-        this.scheduledFuture = SCHEDULER.scheduleAtFixedRate(this::tick, 0, Config.GAME_NSPT, TimeUnit.NANOSECONDS);
+//        this.scheduledFuture = SCHEDULER.scheduleAtFixedRate(this::tick, 0, Config.GAME_NSPT, TimeUnit.NANOSECONDS);
         super.start();
     }
 
