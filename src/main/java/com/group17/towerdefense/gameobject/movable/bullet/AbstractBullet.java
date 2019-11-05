@@ -8,7 +8,7 @@ import com.group17.towerdefense.repositories.entity.FireableSingleEntity;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.repositories.entity.MovableEntity;
 
-public abstract class AbstractBullet implements MovableEntity, DestroyableEntity {
+public abstract class AbstractBullet implements MovableEntity {
     protected Point position;
     protected DescartesVector vectorVelocity;
     protected PolarVector directionVector;
@@ -31,7 +31,6 @@ public abstract class AbstractBullet implements MovableEntity, DestroyableEntity
     public double getPosY() {
         return position.getY();
     }
-
 
     @Override
     public double getWidth() {

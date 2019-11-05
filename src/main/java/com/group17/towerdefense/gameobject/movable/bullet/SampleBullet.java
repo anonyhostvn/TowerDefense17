@@ -7,6 +7,7 @@ import com.group17.towerdefense.mesurement.PolarVector;
 import com.group17.towerdefense.repositories.entity.DestroyableEntity;
 import com.group17.towerdefense.repositories.entity.FireableSingleEntity;
 import com.group17.towerdefense.repositories.entity.GameEntity;
+import com.group17.towerdefense.utility.Utility;
 
 public class SampleBullet extends AbstractBullet implements FireableSingleEntity {
     private GameEntity target;
@@ -27,7 +28,7 @@ public class SampleBullet extends AbstractBullet implements FireableSingleEntity
     }
 
     @Override
-    public double getDamage() {
+    public int getDamage() {
         return Config.SAMPLE_BULLET_DAMAGE;
     }
 
@@ -50,15 +51,15 @@ public class SampleBullet extends AbstractBullet implements FireableSingleEntity
     @Override
     public void doUpdate(long tick) {
         doMove();
+        if (Utility.calculateDistance(this, this.target) <= 10) {
+            DestroyableEntity destroyableTarget = (DestroyableEntity) this.target;
+            destroyableTarget.beAttacked(this.getDamage());
+            this.isExist = false;
+        }
     }
 
     @Override
     public boolean isExist() {
         return isExist;
-    }
-
-    @Override
-    public int getHealth() {
-        return 1;
     }
 }

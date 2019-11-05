@@ -24,7 +24,9 @@ public class GraphicProcessor {
             Map.entry(SampleBullet.class, 5)
     ));
 
-    private int entityOrderComparator(GameEntity A , GameEntity B) {
+
+    private
+    int entityOrderComparator(GameEntity A , GameEntity B) {
         return Integer.compare(entityOrder.get(A.getClass()), entityOrder.get(B.getClass()));
      }
 

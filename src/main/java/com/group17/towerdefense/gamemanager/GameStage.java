@@ -2,6 +2,7 @@ package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Main;
 import com.group17.towerdefense.mesurement.Point;
+import com.group17.towerdefense.mesurement.TurningPoint;
 
 import java.io.File;
 import java.io.InputStream;
@@ -10,11 +11,11 @@ import java.util.Scanner;
 
 public class GameStage {
     private int[][] map;
-    private Point[] startPoint;
-    private Point[] endPoint;
+    private Point startPoint;
     private int width;
     private int height;
     private long score;
+    private TurningPoint[] turningPoints;
 
     private int health, coins;
 
@@ -26,20 +27,19 @@ public class GameStage {
 
             height = scannerInp.nextInt();
             width = scannerInp.nextInt();
-            this.startPoint = new Point[]{
-                    new Point (scannerInp.nextInt(), scannerInp.nextInt()),
-                    new Point (scannerInp.nextInt(), scannerInp.nextInt())
-            };
-            this.endPoint = new Point[]{
-                    new Point (scannerInp.nextInt(), scannerInp.nextInt()),
-                    new Point (scannerInp.nextInt(), scannerInp.nextInt())
-            };
+            this.startPoint = new Point (scannerInp.nextInt(), scannerInp.nextInt());
 
             this.map = new int[height][width];
             for (int i = 0; i < height; i++)
                 for (int j = 0; j < width; j++) map[i][j] = scannerInp.nextInt();
             this.health = 5;
             this.coins = 0;
+
+            int cntTurningPoint = scannerInp.nextInt();
+            turningPoints = new TurningPoint[cntTurningPoint];
+            for (int i = 0; i < cntTurningPoint; i++) {
+                turningPoints[i] = new TurningPoint(new Point(scannerInp.nextInt(), scannerInp.nextInt()), scannerInp.nextInt());
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Resource not found");
@@ -77,12 +77,8 @@ public class GameStage {
         return this.coins;
     }
 
-    public Point[] getStartPoint() {
+    public Point getStartPoint() {
         return startPoint;
-    }
-
-    public Point[] getEndPoint() {
-        return endPoint;
     }
 
     public int getWidth() {
@@ -95,5 +91,9 @@ public class GameStage {
 
     public int getMapIn(int x, int y) {
         return map[x][y];
+    }
+
+    public TurningPoint[] getTurningPoints() {
+        return this.turningPoints;
     }
 }

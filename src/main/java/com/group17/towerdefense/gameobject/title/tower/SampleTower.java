@@ -17,7 +17,7 @@ public class SampleTower extends AbstractTower {
     private final Class<? extends AbstractBullet> ownBulletClass = SampleBullet.class;
     private final double range = Config.SAMPLE_TOWER_RANGE;
     private final double damage = Config.SAMPLE_BULLET_DAMAGE;
-    private final double frameGap = 300;
+    private final double frameGap = Config.SAMPLE_TOWER_FRAME_GAP;
 
     public SampleTower(Point fieldPoint, GameField gameField){
         this.fieldPoint = new Point(fieldPoint);

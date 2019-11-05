@@ -10,6 +10,10 @@ public class PolarVector {
     public PolarVector(DescartesVector descartesVector) {
         this.d = Math.sqrt(descartesVector.getX() * descartesVector.getX() + descartesVector.getY() * descartesVector.getY());
         this.fi = Math.atan(descartesVector.getY() / descartesVector.getX());
+        if (descartesVector.getX() < 0) {
+            if (descartesVector.getY() < 0) this.fi -= Math.PI;
+            else this.fi += Math.PI;
+        }
     }
 
     public PolarVector(Point point_1, Point point_2) {
