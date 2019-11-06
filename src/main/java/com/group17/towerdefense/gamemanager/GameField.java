@@ -33,9 +33,9 @@ public class GameField {
                     allGameEntity.add(new Road(j * Config.SCREEN_HEIGHT_RATIO, i * Config.SCREEN_WIDTH_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
                 }
 
-        GameEntity enemy1 = new SampleEnemy(2, new DescartesVector(-0.2,0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()), 50, 50 );
+        GameEntity enemy1 = new SampleEnemy(new DescartesVector(-0.2,0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()), 50, 50 , this);
         allGameEntity.add(enemy1);
-        allGameEntity.add(new SampleTower(new Point(15,7), this));
+//        allGameEntity.add(new SampleTower(new Point(15,7), this));
     }
 
     public void tick() {

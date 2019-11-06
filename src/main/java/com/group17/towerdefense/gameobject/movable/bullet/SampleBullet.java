@@ -33,6 +33,11 @@ public class SampleBullet extends AbstractBullet implements FireableSingleEntity
     }
 
     @Override
+    public void setVectorVelocity(DescartesVector descartesVector) {
+        this.vectorVelocity = new DescartesVector(descartesVector);
+    }
+
+    @Override
     public void doMove() {
         PolarVector directionVector = new PolarVector(this.position , new Point(target.getPosX(), target.getPosY()));
         this.directionVector = directionVector;

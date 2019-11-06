@@ -1,5 +1,7 @@
 package com.group17.towerdefense.gameobject.movable.enemy;
 
+import com.group17.towerdefense.gamemanager.GameField;
+import com.group17.towerdefense.mesurement.PolarVector;
 import com.group17.towerdefense.repositories.entity.DestroyableEntity;
 import com.group17.towerdefense.repositories.entity.MovableEntity;
 import com.group17.towerdefense.mesurement.DescartesVector;
@@ -11,6 +13,7 @@ public abstract class AbstractGroundEnemy implements MovableEntity, DestroyableE
     protected Point position;
     protected DescartesVector vectorVelocity;
     protected int health;
+    protected GameField recentGameField;
 
     @Override
     public double getAbsVelocity() {
@@ -35,5 +38,37 @@ public abstract class AbstractGroundEnemy implements MovableEntity, DestroyableE
     @Override
     public double getWidth() {
         return width;
+    }
+
+    @Override
+    public void setVectorVelocity(DescartesVector descartesVector) {
+        this.vectorVelocity = new DescartesVector(descartesVector);
+    }
+
+    @Override
+    public DescartesVector getVectorVelocity() {
+        return this.vectorVelocity;
+    }
+
+
+    @Override
+    public void beAttacked(int damage) {
+        this.health -= damage;
+    }
+
+    @Override
+    public int getHealth() {
+        return this.health;
+    }
+
+    @Override
+    public boolean isExist() {
+        return health > 0;
+    }
+
+    @Override
+    public double getAngle() {
+        PolarVector polarVector = new PolarVector(this.vectorVelocity);
+        return Math.toDegrees(polarVector.getFi());
     }
 }

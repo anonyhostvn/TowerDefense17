@@ -1,9 +1,13 @@
 package com.group17.towerdefense.utility;
 
 import com.group17.towerdefense.Config;
+import com.group17.towerdefense.mesurement.DescartesVector;
 import com.group17.towerdefense.mesurement.Point;
+import com.group17.towerdefense.mesurement.PolarVector;
+import com.group17.towerdefense.mesurement.TurningPoint;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.repositories.entity.GameTile;
+import com.group17.towerdefense.repositories.entity.MovableEntity;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,5 +37,21 @@ public class Utility {
         params.setTransform(new Rotate(angle, img.getHeight() / 2, img.getWidth() / 2));
         params.setViewport(new Rectangle2D(0, 0, img.getHeight(), img.getWidth()));
         return imgView.snapshot(params, null);
+    }
+
+    public static void modifyVectorVelocity(TurningPoint[] listCheckPoint, Point recentPoint, MovableEntity target) {
+        Point fieldPoint = fromScreenPointToFieldPoint(new Point(target.getPosX(), target.getPosY()));
+        Point centerPoint = new Point (
+                fieldPoint.getX() * Config.SCREEN_WIDTH_RATIO + Config.SCREEN_WIDTH_RATIO / 2,
+                fieldPoint.getY() * Config.SCREEN_HEIGHT_RATIO + Config.SCREEN_HEIGHT_RATIO / 2
+        );
+
+
+        for (TurningPoint turningPoint: listCheckPoint) {
+            if (fieldPoint.lengthTo(turningPoint.getPoint()) <= 1){
+                PolarVector temp = new PolarVector(target.getAbsVelocity(),Math.toRadians(turningPoint.getAngle()));
+                target.setVectorVelocity(new DescartesVector(temp));
+            }
+        }
     }
 }

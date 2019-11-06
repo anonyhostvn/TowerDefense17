@@ -18,6 +18,10 @@ public class Point {
         return Math.sqrt( (x - point.getX()) * (x - point.getX()) + (y - point.getY()) * (y - point.getY()) ) ;
     }
 
+    public void print (String message) {
+        System.out.println(message + " : " + getX() + " - " + getY());
+    }
+
     public double getX() {
         return x;
     }
@@ -32,5 +36,9 @@ public class Point {
 
     public void setY(double y) {
         this.y = y;
+    }
+
+    public boolean equal(Point other) {
+        return this.getX() == other.getX() && this.getY() == other.getY();
     }
 }
