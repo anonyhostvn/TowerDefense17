@@ -8,12 +8,12 @@ import com.group17.towerdefense.utility.Utility;
 
 public class SampleEnemy extends AbstractGroundEnemy {
 
-    public SampleEnemy (DescartesVector vectorVelocity, Point position, double width, double height, GameField gameField) {
+    public SampleEnemy (Point position, GameField gameField) {
         this.absVelocity = Config.SAMPLE_ENEMY_ABS_VELOCITY;
-        this.width = width;
-        this.height = height;
+        this.width = Config.SAMPLE_ENEMY_WIDTH;
+        this.height = Config.SAMPLE_ENEMY_HEIGHT;
         this.position = new Point(position);
-        this.vectorVelocity = vectorVelocity;
+        this.vectorVelocity = new DescartesVector(0,0);
         this.health = Config.SAMPLE_ENEMY_INIT_HEALTH;
         this.recentGameField = gameField;
     }

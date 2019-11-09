@@ -2,6 +2,7 @@ package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.title.ground.Mountain;
@@ -21,7 +22,8 @@ public class GraphicProcessor {
             Map.entry(Road.class, 2),
             Map.entry(SampleEnemy.class, 3),
             Map.entry(SampleTower.class, 4),
-            Map.entry(SampleBullet.class, 5)
+            Map.entry(SampleBullet.class, 5),
+            Map.entry(SampleSpawner.class, 6)
     ));
 
 
@@ -35,7 +37,8 @@ public class GraphicProcessor {
             Map.entry(Road.class, new RoadDrawer()),
             Map.entry(SampleEnemy.class, new SampleEnemyDrawer()),
             Map.entry(SampleTower.class, new SampleTowerDrawer()),
-            Map.entry(SampleBullet.class, new SampleBulletDrawer())
+            Map.entry(SampleBullet.class, new SampleBulletDrawer()),
+            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer())
     ));
 
     public GraphicProcessor(GraphicsContext graphicsContext, GameField gameField) {

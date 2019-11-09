@@ -1,7 +1,10 @@
 package com.group17.towerdefense.gamemanager;
 
+import com.group17.towerdefense.AbstractFactory.AbstractEntityFactory;
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.title.Spawner.AbstractSpawner;
+import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.title.ground.Mountain;
@@ -19,6 +22,8 @@ public class GameField {
     private GameStage recentStage;
     private Set<GameEntity> allGameEntity;
     private long ticks;
+    private AbstractEntityFactory entityFactory;
+    private AbstractSpawner recentSpawner;
 
     public GameField(GameStage gameStage) {
         ticks = 0;
@@ -33,9 +38,13 @@ public class GameField {
                     allGameEntity.add(new Road(j * Config.SCREEN_HEIGHT_RATIO, i * Config.SCREEN_WIDTH_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
                 }
 
-        GameEntity enemy1 = new SampleEnemy(new DescartesVector(-0.2,0), Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()), 50, 50 , this);
-        allGameEntity.add(enemy1);
-//        allGameEntity.add(new SampleTower(new Point(15,7), this));
+        entityFactory = new AbstractEntityFactory(this);
+
+//        GameEntity enemy1 = new SampleEnemy(Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()), this);
+//        allGameEntity.add(enemy1);
+        recentSpawner = new SampleSpawner(Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()),this.entityFactory, recentStage.getListEnemy(), this);
+        allGameEntity.add(recentSpawner);
+        allGameEntity.add(new SampleTower(new Point(15,7), this));
     }
 
     public void tick() {

@@ -18,6 +18,7 @@ public class SampleTower extends AbstractTower {
     private final double range = Config.SAMPLE_TOWER_RANGE;
     private final double damage = Config.SAMPLE_BULLET_DAMAGE;
     private final double frameGap = Config.SAMPLE_TOWER_FRAME_GAP;
+    private GameEntity targetObj = null;
 
     public SampleTower(Point fieldPoint, GameField gameField){
         this.fieldPoint = new Point(fieldPoint);
@@ -65,18 +66,20 @@ public class SampleTower extends AbstractTower {
     @Override
     public void doAttack()  {
         double minRange = Double.MAX_VALUE;
-        GameEntity targetObject = null;
 
-        for (GameEntity gameEntity : this.gameField.getAllGameEntity())
-            if (this.getTargetClass().contains(gameEntity.getClass())){
-                double distance = Utility.calculateDistance(this, gameEntity);
-                if (distance < this.getRange() && minRange > this.getRange()) {
-                    minRange = distance;
-                    targetObject = gameEntity;
+        if (targetObj != null && !targetObj.isExist()) targetObj = null;
+
+        if (targetObj == null)
+            for (GameEntity gameEntity : this.gameField.getAllGameEntity())
+                if (this.getTargetClass().contains(gameEntity.getClass())){
+                    double distance = Utility.calculateDistance(this, gameEntity);
+                    if (distance < this.getRange() && minRange > this.getRange()) {
+                        minRange = distance;
+                        targetObj = gameEntity;
+                    }
                 }
-            }
 
-        if (targetObject != null)
-            this.gameField.addEntity(new SampleBullet(new Point(getPosX(), getPosY()), targetObject));
+        if (targetObj != null)
+            this.gameField.addEntity(new SampleBullet(new Point(getPosX(), getPosY()), targetObj));
     }
 }

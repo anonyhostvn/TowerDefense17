@@ -16,6 +16,7 @@ public class GameStage {
     private int height;
     private long score;
     private TurningPoint[] turningPoints;
+    private int[] listEnemy;
 
     private int health, coins;
 
@@ -40,6 +41,11 @@ public class GameStage {
             for (int i = 0; i < cntTurningPoint; i++) {
                 turningPoints[i] = new TurningPoint(new Point(scannerInp.nextInt(), scannerInp.nextInt()), scannerInp.nextInt());
             }
+
+            int cntEnemy = scannerInp.nextInt();
+            listEnemy = new int[cntEnemy];
+            for (int i = 0; i < cntEnemy; i++) listEnemy[i] = scannerInp.nextInt();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Resource not found");
@@ -48,6 +54,10 @@ public class GameStage {
 
     public void doUpdate() {
 
+    }
+
+    public int[] getListEnemy() {
+        return listEnemy;
     }
 
     public boolean changeCoins(int changeCoins) {
