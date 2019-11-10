@@ -1,16 +1,14 @@
 package com.group17.towerdefense.gamemanager;
 
-import com.group17.towerdefense.AbstractFactory.AbstractEntityFactory;
+import com.group17.towerdefense.abstractfactory.AbstractEntityFactory;
 import com.group17.towerdefense.Config;
-import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
+import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gameobject.title.Spawner.AbstractSpawner;
 import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
 import com.group17.towerdefense.repositories.entity.GameEntity;
-import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.title.ground.Mountain;
 import com.group17.towerdefense.gameobject.title.ground.Road;
 import com.group17.towerdefense.gameobject.title.tower.SampleTower;
-import com.group17.towerdefense.mesurement.DescartesVector;
 import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.utility.Utility;
 
@@ -32,7 +30,7 @@ public class GameField {
 
         for (int i = 0; i < gameStage.getHeight(); i++)
             for (int j = 0; j < gameStage.getWidth(); j++)
-                if (gameStage.getMapIn(i,j) == 0) {
+                if (gameStage.getMapIn(i,j) == GameFlag.MOUNTAIN) {
                     allGameEntity.add(new Mountain(j * Config.SCREEN_HEIGHT_RATIO,i *  Config.SCREEN_WIDTH_RATIO,  Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
                 } else {
                     allGameEntity.add(new Road(j * Config.SCREEN_HEIGHT_RATIO, i * Config.SCREEN_WIDTH_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
@@ -40,8 +38,6 @@ public class GameField {
 
         entityFactory = new AbstractEntityFactory(this);
 
-//        GameEntity enemy1 = new SampleEnemy(Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()), this);
-//        allGameEntity.add(enemy1);
         recentSpawner = new SampleSpawner(Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()),this.entityFactory, recentStage.getListEnemy(), this);
         allGameEntity.add(recentSpawner);
         allGameEntity.add(new SampleTower(new Point(15,7), this));
@@ -60,7 +56,7 @@ public class GameField {
         ArrayList<GameEntity> removeList = new ArrayList<GameEntity>();
         for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) removeList.add(gameEntity);
         for (GameEntity removedEntity : removeList) allGameEntity.remove(removedEntity);
-     }
+    }
 
     public void addEntity(GameEntity gameEntity) {
         allGameEntity.add(gameEntity);
@@ -72,5 +68,16 @@ public class GameField {
 
     public GameStage getRecentStage(){
         return this.recentStage;
+    }
+
+    public void createNewTower(Point fieldPoint, GameFlag tower) {
+        int X = (int) fieldPoint.getX(), Y = (int) fieldPoint.getY();
+        GameFlag obj = recentStage.getMapIn(Y,X);
+        if (tower == GameFlag.SAMPLE_TOWER) {
+            if (obj == GameFlag.MOUNTAIN){
+                addEntity(entityFactory.createTowerFactory().createSampleTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.SAMPLE_TOWER);
+            }
+        }
     }
 }

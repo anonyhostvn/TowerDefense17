@@ -1,7 +1,7 @@
 package com.group17.towerdefense.gameobject.title.Spawner;
 
-import com.group17.towerdefense.AbstractFactory.AbstractEntityFactory;
-import com.group17.towerdefense.AbstractFactory.EnemyFactory;
+import com.group17.towerdefense.abstractfactory.AbstractEntityFactory;
+import com.group17.towerdefense.abstractfactory.EnemyFactory;
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.mesurement.Point;

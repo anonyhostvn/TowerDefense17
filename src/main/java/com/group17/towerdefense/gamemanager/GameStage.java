@@ -1,16 +1,14 @@
 package com.group17.towerdefense.gamemanager;
 
-import com.group17.towerdefense.Main;
+import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.mesurement.TurningPoint;
 
-import java.io.File;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Scanner;
 
 public class GameStage {
-    private int[][] map;
+    private GameFlag[][] map;
     private Point startPoint;
     private int width;
     private int height;
@@ -30,11 +28,16 @@ public class GameStage {
             width = scannerInp.nextInt();
             this.startPoint = new Point (scannerInp.nextInt(), scannerInp.nextInt());
 
-            this.map = new int[height][width];
+            this.map = new GameFlag[height][width];
             for (int i = 0; i < height; i++)
-                for (int j = 0; j < width; j++) map[i][j] = scannerInp.nextInt();
+                for (int j = 0; j < width; j++) {
+                    int temp = scannerInp.nextInt();
+                    if (temp == 0) map[i][j] = GameFlag.MOUNTAIN;
+                    else map[i][j] = GameFlag.ROAD;
+//                    map[i][j] = scannerInp.nextInt();
+                }
             this.health = 5;
-            this.coins = 0;
+            this.coins = 100;
 
             int cntTurningPoint = scannerInp.nextInt();
             turningPoints = new TurningPoint[cntTurningPoint];
@@ -99,11 +102,15 @@ public class GameStage {
         return height;
     }
 
-    public int getMapIn(int x, int y) {
+    public GameFlag getMapIn(int x, int y) {
         return map[x][y];
     }
 
     public TurningPoint[] getTurningPoints() {
         return this.turningPoints;
+    }
+
+    public void setMap(int x, int y, GameFlag obj) {
+        this.map[x][y] = obj;
     }
 }

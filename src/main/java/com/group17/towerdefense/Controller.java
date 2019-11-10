@@ -38,11 +38,29 @@ public class Controller extends AnimationTimer {
         gameStage = new GameStage();
         gameField = new GameField(gameStage);
         graphicProcessor = new GraphicProcessor(graphicsContext, gameField);
+
+        graphicProcessor.render();
     }
 
     public void start() {
         this.scheduledFuture = SCHEDULER.scheduleAtFixedRate(this::tick, 0, Config.GAME_NSPT, TimeUnit.NANOSECONDS);
         super.start();
+    }
+
+    public GameField getGameField() {
+        return gameField;
+    }
+
+    public GameStage getGameStage() {
+        return gameStage;
+    }
+
+    public void startGame() {
+        super.start();
+    }
+
+    public void stopGame() {
+        super.stop();
     }
 
     @Override

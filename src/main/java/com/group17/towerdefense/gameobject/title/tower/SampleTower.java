@@ -6,6 +6,7 @@ import com.group17.towerdefense.gameobject.movable.bullet.AbstractBullet;
 import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
 import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.mesurement.Point;
+import com.group17.towerdefense.mesurement.PolarVector;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.utility.Utility;
 
@@ -27,6 +28,10 @@ public class SampleTower extends AbstractTower {
 
     @Override
     public double getAngle() {
+        if (targetObj != null) {
+            PolarVector direction = new PolarVector(new Point(getPosX(), getPosY()) , new Point(targetObj.getPosX(), targetObj.getPosY()));
+            return Math.toDegrees(direction.getFi()) + 90;
+        }
         return 0;
     }
 
@@ -67,17 +72,14 @@ public class SampleTower extends AbstractTower {
     public void doAttack()  {
         double minRange = Double.MAX_VALUE;
 
-        if (targetObj != null && !targetObj.isExist()) targetObj = null;
-
-        if (targetObj == null)
-            for (GameEntity gameEntity : this.gameField.getAllGameEntity())
-                if (this.getTargetClass().contains(gameEntity.getClass())){
-                    double distance = Utility.calculateDistance(this, gameEntity);
-                    if (distance < this.getRange() && minRange > this.getRange()) {
-                        minRange = distance;
-                        targetObj = gameEntity;
-                    }
+        for (GameEntity gameEntity : this.gameField.getAllGameEntity())
+            if (this.getTargetClass().contains(gameEntity.getClass())){
+                double distance = Utility.calculateDistance(this, gameEntity);
+                if (distance < this.getRange() && minRange > this.getRange()) {
+                    minRange = distance;
+                    targetObj = gameEntity;
                 }
+            }
 
         if (targetObj != null)
             this.gameField.addEntity(new SampleBullet(new Point(getPosX(), getPosY()), targetObj));

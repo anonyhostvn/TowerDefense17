@@ -18,7 +18,7 @@ import javafx.scene.transform.Rotate;
 
 public class Utility {
     public static Point fromScreenPointToFieldPoint(Point screenPoint) {
-        return new Point(screenPoint.getX() / Config.SCREEN_WIDTH_RATIO, screenPoint.getY() / Config.SCREEN_HEIGHT_RATIO);
+        return new Point((int) screenPoint.getX() / Config.SCREEN_WIDTH_RATIO, (int) screenPoint.getY() / Config.SCREEN_HEIGHT_RATIO);
     }
 
     public static Point fromFieldPointToScreenPoint(Point fieldPoint) {
