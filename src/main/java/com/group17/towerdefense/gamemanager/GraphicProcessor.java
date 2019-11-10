@@ -1,18 +1,20 @@
 package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Config;
-import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
-import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
-import com.group17.towerdefense.repositories.entity.GameEntity;
-import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
-import com.group17.towerdefense.gameobject.title.ground.Mountain;
-import com.group17.towerdefense.gameobject.title.ground.Road;
-import com.group17.towerdefense.gameobject.title.tower.SampleTower;
+import com.group17.towerdefense.gameflag.GameFlag;
+import com.group17.towerdefense.gameobject.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
+import com.group17.towerdefense.gameobject.ground.Mountain;
+import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
+import com.group17.towerdefense.gameobject.tower.SampleTower;
 import com.group17.towerdefense.graphic.*;
+import com.group17.towerdefense.repositories.entity.GameEntity;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Text;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GraphicProcessor {
     private GraphicsContext graphicsContext;
@@ -63,5 +65,13 @@ public class GraphicProcessor {
 
         graphicsContext.fillText("Coins: " + this.gameField.getRecentStage().getCoins(), 20, 20);
         graphicsContext.fillText("Health: " + this.gameField.getRecentStage().getHealth(), 20, 40);
+
+        if (this.gameField.getRecentStage().gameStatus() == GameFlag.GAME_LOOSE) {
+            graphicsContext.fillText("Game Over", Config.SCREEN_WIDTH / 2 , Config.SCREEN_HEIGHT / 2);
+            graphicsContext.strokeText("Game Over" , Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT / 2);
+        } else if (this.gameField.getRecentStage().gameStatus() == GameFlag.GAME_WIN) {
+            graphicsContext.fillText("Winner", Config.SCREEN_WIDTH / 2 , Config.SCREEN_HEIGHT / 2);
+            graphicsContext.strokeText("Winner" , Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT / 2);
+        }
     }
 }

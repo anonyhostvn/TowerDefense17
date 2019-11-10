@@ -1,6 +1,5 @@
 package com.group17.towerdefense.graphic;
 
-import com.group17.towerdefense.Main;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

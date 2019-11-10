@@ -1,6 +1,6 @@
 package com.group17.towerdefense.graphic;
 
-import com.group17.towerdefense.gameobject.title.ground.Mountain;
+import com.group17.towerdefense.gameobject.ground.Mountain;
 import com.group17.towerdefense.utility.Utility;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

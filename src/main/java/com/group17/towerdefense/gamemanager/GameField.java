@@ -1,16 +1,15 @@
 package com.group17.towerdefense.gamemanager;
 
-import com.group17.towerdefense.abstractfactory.AbstractEntityFactory;
 import com.group17.towerdefense.Config;
+import com.group17.towerdefense.abstractfactory.AbstractEntityFactory;
 import com.group17.towerdefense.gameflag.GameFlag;
-import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
-import com.group17.towerdefense.gameobject.title.Spawner.AbstractSpawner;
-import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
-import com.group17.towerdefense.repositories.entity.GameEntity;
-import com.group17.towerdefense.gameobject.title.ground.Mountain;
-import com.group17.towerdefense.gameobject.title.ground.Road;
-import com.group17.towerdefense.gameobject.title.tower.SampleTower;
+import com.group17.towerdefense.gameobject.enemy.AbstractGroundEnemy;
+import com.group17.towerdefense.gameobject.ground.Mountain;
+import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.spawner.AbstractSpawner;
+import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
 import com.group17.towerdefense.mesurement.Point;
+import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.utility.Utility;
 
 import java.util.ArrayList;
@@ -43,6 +42,14 @@ public class GameField {
         allGameEntity.add(recentSpawner);
     }
 
+    private void checkEnemyReachGoal() {
+        for (GameEntity gameEntity : allGameEntity)
+            if (gameEntity instanceof AbstractGroundEnemy && gameEntity.getPosX() < 0)  {
+                ((AbstractGroundEnemy) gameEntity).beAttacked(10000);
+                this.recentStage.decreaseHealth();
+            }
+    }
+
     public void tick() {
         ticks++;
         try {
@@ -53,8 +60,13 @@ public class GameField {
             System.out.println(allGameEntity.size());
         }
 
+        checkEnemyReachGoal();
+
         ArrayList<GameEntity> removeList = new ArrayList<GameEntity>();
-        for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) removeList.add(gameEntity);
+        for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) {
+            if (gameEntity instanceof AbstractGroundEnemy) this.getRecentStage().destroyEnemy();
+            removeList.add(gameEntity);
+        }
         for (GameEntity removedEntity : removeList) {
             allGameEntity.remove(removedEntity);
         }
