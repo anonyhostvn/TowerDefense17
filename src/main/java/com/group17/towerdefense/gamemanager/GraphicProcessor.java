@@ -10,6 +10,7 @@ import com.group17.towerdefense.gameobject.title.ground.Road;
 import com.group17.towerdefense.gameobject.title.tower.SampleTower;
 import com.group17.towerdefense.graphic.*;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Text;
 
 import java.util.*;
 
@@ -59,5 +60,8 @@ public class GraphicProcessor {
         for (GameEntity gameEntity: entityArray) {
             pairGraphics.get(gameEntity.getClass()).draw(graphicsContext, gameEntity.getPosX(), gameEntity.getPosY(), (int) gameEntity.getWidth(), (int) gameEntity.getHeight(), gameEntity.getAngle());
         }
+
+        graphicsContext.fillText("Coins: " + this.gameField.getRecentStage().getCoins(), 20, 20);
+        graphicsContext.fillText("Health: " + this.gameField.getRecentStage().getHealth(), 20, 40);
     }
 }

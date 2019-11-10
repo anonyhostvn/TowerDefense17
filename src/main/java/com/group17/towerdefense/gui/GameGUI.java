@@ -13,23 +13,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class GameGUI {
     private Controller gameController;
     private HBox GUILayout;
     private GameFlag choosingTower;
-    private GameStageGUI gameStageGUI;
 
     private static final Image sampleTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile249.png"));
     private static final ImageView sampleTowerIcon = new ImageView(sampleTowerImage);
 
     public GameGUI(Controller gameController) {
         this.gameController = gameController;
-
-        this.gameStageGUI = new GameStageGUI(this.gameController.getGameField().getRecentStage());
-        this.GUILayout = new HBox(gridLayout());
-        this.GUILayout.getChildren().add(this.gameStageGUI.getGameStageGUI());
 
         sampleTowerIcon.setFitWidth(Config.ICON_WIDTH);
         sampleTowerIcon.setFitHeight(Config.ICON_HEIGHT);
@@ -64,18 +62,20 @@ public class GameGUI {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
+
         gridPane.setPadding(new Insets(10, 10, 10 , 10));
-        gridPane.add(startButton(), 0, 0, 2, 1);
-        gridPane.add(stopButton(), 0, 1, 2, 1);
-        gridPane.add(sampleTower(), 0, 2, 2, 1);
+        gridPane.add(titleText(), 0, 0, 2, 1);
+        gridPane.add(startButton(), 0, 1, 2, 1);
+        gridPane.add(stopButton(), 0, 2, 2, 1);
+        gridPane.add(sampleTower(), 0, 3, 2, 1);
         return gridPane;
     }
 
-    public void addText() {
+    public Text titleText() {
         Text text = new Text();
-        text.setText("Sample Text");
-
-        this.GUILayout.getChildren().add(text);
+        text.setText("Tower Defense");
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        return text;
     }
 
     public void handleClickEvent(MouseEvent e) {
@@ -87,6 +87,7 @@ public class GameGUI {
     }
 
     public HBox getGUILayout() {
+        this.GUILayout = new HBox(gridLayout());
         return this.GUILayout;
     }
 }

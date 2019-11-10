@@ -3,6 +3,7 @@ package com.group17.towerdefense.gamemanager;
 import com.group17.towerdefense.abstractfactory.AbstractEntityFactory;
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameflag.GameFlag;
+import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.title.Spawner.AbstractSpawner;
 import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
 import com.group17.towerdefense.repositories.entity.GameEntity;
@@ -40,7 +41,6 @@ public class GameField {
 
         recentSpawner = new SampleSpawner(Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()),this.entityFactory, recentStage.getListEnemy(), this);
         allGameEntity.add(recentSpawner);
-        allGameEntity.add(new SampleTower(new Point(15,7), this));
     }
 
     public void tick() {
@@ -55,7 +55,9 @@ public class GameField {
 
         ArrayList<GameEntity> removeList = new ArrayList<GameEntity>();
         for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) removeList.add(gameEntity);
-        for (GameEntity removedEntity : removeList) allGameEntity.remove(removedEntity);
+        for (GameEntity removedEntity : removeList) {
+            allGameEntity.remove(removedEntity);
+        }
     }
 
     public void addEntity(GameEntity gameEntity) {
@@ -77,6 +79,7 @@ public class GameField {
             if (obj == GameFlag.MOUNTAIN){
                 addEntity(entityFactory.createTowerFactory().createSampleTower(fieldPoint));
                 recentStage.setMap(Y,X,GameFlag.SAMPLE_TOWER);
+                this.getRecentStage().changeCoins(-Config.SAMPLE_TOWER_PRICE);
             }
         }
     }

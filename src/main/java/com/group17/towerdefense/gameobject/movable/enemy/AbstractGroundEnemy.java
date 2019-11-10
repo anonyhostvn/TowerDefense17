@@ -1,5 +1,6 @@
 package com.group17.towerdefense.gameobject.movable.enemy;
 
+import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.mesurement.PolarVector;
 import com.group17.towerdefense.repositories.entity.DestroyableEntity;
@@ -48,12 +49,6 @@ public abstract class AbstractGroundEnemy implements MovableEntity, DestroyableE
     @Override
     public DescartesVector getVectorVelocity() {
         return this.vectorVelocity;
-    }
-
-
-    @Override
-    public void beAttacked(int damage) {
-        this.health -= damage;
     }
 
     @Override

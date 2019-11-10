@@ -19,6 +19,12 @@ public class SampleEnemy extends AbstractGroundEnemy {
     }
 
     @Override
+    public void beAttacked(int damage) {
+        this.health -= damage;
+        if (this.health <= 0) this.recentGameField.getRecentStage().changeCoins(Config.SAMPLE_ENEMY_AWARD);
+    }
+
+    @Override
     public void doUpdate(long tick) {
         this.doMove();
     }
