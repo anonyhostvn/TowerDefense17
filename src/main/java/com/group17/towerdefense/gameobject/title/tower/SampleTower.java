@@ -72,6 +72,8 @@ public class SampleTower extends AbstractTower {
     public void doAttack()  {
         double minRange = Double.MAX_VALUE;
 
+        this.targetObj = null;
+
         for (GameEntity gameEntity : this.gameField.getAllGameEntity())
             if (this.getTargetClass().contains(gameEntity.getClass())){
                 double distance = Utility.calculateDistance(this, gameEntity);
