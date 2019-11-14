@@ -12,20 +12,18 @@ import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.utility.Utility;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class GameField {
     private GameStage recentStage;
-    private Set<GameEntity> allGameEntity;
+    private Queue<GameEntity> allGameEntity;
     private long ticks;
     private AbstractEntityFactory entityFactory;
     private AbstractSpawner recentSpawner;
 
     public GameField(GameStage gameStage) {
         ticks = 0;
-        allGameEntity = new HashSet<GameEntity>();
+        allGameEntity = new PriorityQueue<GameEntity>(Config::entityOrderComparator);
         this.recentStage = gameStage;
 
         for (int i = 0; i < gameStage.getHeight(); i++)
@@ -76,7 +74,7 @@ public class GameField {
         allGameEntity.add(gameEntity);
     }
 
-    public Set<GameEntity> getAllGameEntity() {
+    public Queue<GameEntity> getAllGameEntity() {
         return allGameEntity;
     }
 

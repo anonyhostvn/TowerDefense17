@@ -1,5 +1,16 @@
 package com.group17.towerdefense;
 
+import com.group17.towerdefense.gameobject.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
+import com.group17.towerdefense.gameobject.ground.Mountain;
+import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
+import com.group17.towerdefense.gameobject.tower.SampleTower;
+import com.group17.towerdefense.repositories.entity.GameEntity;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Config {
     public static final String GAME_NAME = "Tower Defense";
 
@@ -30,4 +41,18 @@ public final class Config {
 
     public static final int ICON_WIDTH = 50;
     public static final int ICON_HEIGHT = 50;
+
+    public static final Map<Class<? extends GameEntity>, Integer> entityOrder = new HashMap<Class<? extends GameEntity>, Integer>(Map.ofEntries(
+            Map.entry(Mountain.class, 1),
+            Map.entry(Road.class, 2),
+            Map.entry(SampleEnemy.class, 3),
+            Map.entry(SampleTower.class, 4),
+            Map.entry(SampleBullet.class, 5),
+            Map.entry(SampleSpawner.class, 6)
+    ));
+
+
+    public static final int entityOrderComparator(GameEntity A , GameEntity B) {
+        return Integer.compare(entityOrder.get(A.getClass()), entityOrder.get(B.getClass()));
+    }
 }
