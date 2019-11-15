@@ -9,7 +9,9 @@ import com.group17.towerdefense.gameobject.ground.Road;
 import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
 import com.group17.towerdefense.gameobject.tower.SampleTower;
 import com.group17.towerdefense.graphic.*;
+import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.repositories.entity.GameEntity;
+import com.group17.towerdefense.utility.Utility;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Arrays;
@@ -29,6 +31,8 @@ public class GraphicProcessor {
             Map.entry(SampleSpawner.class, new SampleSpawnerDrawer())
     ));
 
+    private final DrawerEntity hoverRectDrawer = new HoverRectangleDrawer();
+
     public GraphicProcessor(GraphicsContext graphicsContext, GameField gameField) {
         this.graphicsContext = graphicsContext;
         this.gameField = gameField;
@@ -39,6 +43,11 @@ public class GraphicProcessor {
 
         for (GameEntity gameEntity: gameField.getAllGameEntity()) {
             pairGraphics.get(gameEntity.getClass()).draw(graphicsContext, gameEntity.getPosX(), gameEntity.getPosY(), (int) gameEntity.getWidth(), (int) gameEntity.getHeight(), gameEntity.getAngle());
+        }
+
+        if (this.gameField.getIsChooseATower() && this.gameField.getRecentMousePosition() != null) {
+            Point drawerPosition = Utility.getTopLeftPositionOfBlock(gameField.getRecentMousePosition());
+            hoverRectDrawer.draw(graphicsContext, drawerPosition.getX(), drawerPosition.getY(), Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO, 0);
         }
 
         graphicsContext.fillText("Coins: " + this.gameField.getRecentStage().getCoins(), 20, 20);

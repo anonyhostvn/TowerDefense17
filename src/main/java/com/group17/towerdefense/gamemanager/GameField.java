@@ -17,9 +17,12 @@ import java.util.*;
 public class GameField {
     private GameStage recentStage;
     private Queue<GameEntity> allGameEntity;
+    private List<GameEntity> addingGameEntity;
     private long ticks;
     private AbstractEntityFactory entityFactory;
     private AbstractSpawner recentSpawner;
+    private Point recentMousePosition;
+    private boolean isChooseATower;
 
     public GameField(GameStage gameStage) {
         ticks = 0;
@@ -38,6 +41,9 @@ public class GameField {
 
         recentSpawner = new SampleSpawner(Utility.fromFieldPointToScreenPoint(gameStage.getStartPoint()),this.entityFactory, recentStage.getListEnemy(), this);
         allGameEntity.add(recentSpawner);
+        recentMousePosition = null;
+        this.isChooseATower = false;
+        this.addingGameEntity = new ArrayList<GameEntity>();
     }
 
     private void checkEnemyReachGoal() {
@@ -55,7 +61,8 @@ public class GameField {
                 gameEntity.doUpdate(ticks);
             }
         } catch(Exception e) {
-            System.out.println(allGameEntity.size());
+            e.printStackTrace();
+            System.out.println("Error when update : " + allGameEntity.size());
         }
 
         checkEnemyReachGoal();
@@ -68,10 +75,32 @@ public class GameField {
         for (GameEntity removedEntity : removeList) {
             allGameEntity.remove(removedEntity);
         }
+
+        for (GameEntity addEntity : addingGameEntity) {
+            allGameEntity.add(addEntity);
+        }
+
+        addingGameEntity.clear();
+    }
+
+    public void setRecentMousePosition(Point position) {
+        this.recentMousePosition = position;
+    }
+
+    public Point getRecentMousePosition() {
+        return recentMousePosition;
+    }
+
+    public void setIsChooseATower(boolean isChooseATower) {
+        this.isChooseATower = isChooseATower;
+    }
+
+    public boolean getIsChooseATower() {
+        return isChooseATower;
     }
 
     public void addEntity(GameEntity gameEntity) {
-        allGameEntity.add(gameEntity);
+        addingGameEntity.add(gameEntity);
     }
 
     public Queue<GameEntity> getAllGameEntity() {

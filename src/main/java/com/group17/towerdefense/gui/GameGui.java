@@ -70,8 +70,8 @@ public class GameGui {
     private Button sampleTower() {
         Button sampleTowerBtn = new Button("Sample tower", sampleTowerIcon);
         sampleTowerBtn.setOnMouseClicked((e) -> {
-            System.out.println("Set sample tower");
             this.choosingTower = GameFlag.SAMPLE_TOWER;
+            this.gameController.getGameField().setIsChooseATower(true);
         });
         return sampleTowerBtn;
     }
@@ -98,10 +98,10 @@ public class GameGui {
     }
 
     private void handleClickEvent(MouseEvent e) {
-        System.out.println(this.choosingTower);
         if (this.choosingTower == null) return;
         Point fieldPoint = Utility.fromScreenPointToFieldPoint(new Point(e.getX(), e.getY()));
         this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SAMPLE_TOWER);
+        this.gameController.getGameField().setIsChooseATower(false);
         this.choosingTower = null;
     }
 
@@ -114,8 +114,14 @@ public class GameGui {
         canvas = new Canvas(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         graphicsContext = canvas.getGraphicsContext2D();
         gameController = new Controller(graphicsContext);
-        canvas.setOnMouseClicked((e) -> {
-            handleClickEvent(e);
+
+        canvas.setOnMouseClicked(this::handleClickEvent);
+        canvas.setOnMouseMoved((e) -> {
+            this.gameController.getGameField().setRecentMousePosition(new Point(e.getX(), e.getY()));
+        });
+
+        canvas.setOnMouseExited((e) -> {
+//            this.gameController.getGameField().setRecentMousePosition(null);
         });
         displayGameScreen();
     }

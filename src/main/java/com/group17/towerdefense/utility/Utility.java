@@ -28,6 +28,10 @@ public class Utility {
         return Math.sqrt(disX * disX + disY * disY);
     }
 
+    public static Point getTopLeftPositionOfBlock(Point position) {
+        return fromFieldPointToScreenPoint(fromScreenPointToFieldPoint(position));
+    }
+
     public static Image rotateImage(Image img, double angle) {
         ImageView imgView = new ImageView(img);
         SnapshotParameters params = new SnapshotParameters();
