@@ -82,5 +82,21 @@ public class GameField {
                 this.getRecentStage().changeCoins(-Config.SAMPLE_TOWER_PRICE);
             }
         }
+
+        //For test(delete if necessary)
+        /*if (tower == GameFlag.SINGLE_BARREL_TOWER) {
+            if (obj == GameFlag.MOUNTAIN){
+                addEntity(entityFactory.createTowerFactory().createSingleBarrelTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.SINGLE_BARREL_TOWER);
+                this.getRecentStage().changeCoins(-Config.SINGLE_BARREL_TOWER_PRICE);
+            }
+        }
+        if (tower == GameFlag.SINGLE_ROCKET_TOWER) {
+            if (obj == GameFlag.MOUNTAIN){
+                addEntity(entityFactory.createTowerFactory().createSingleRocketTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.SINGLE_ROCKET_TOWER);
+                this.getRecentStage().changeCoins(-Config.SINGLE_ROCKET_TOWER_PRICE);
+            }
+        }*/
     }
 }

@@ -1,8 +1,12 @@
 package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Config;
+import com.group17.towerdefense.gameobject.movable.bullet.BigRocket;
 import com.group17.towerdefense.gameobject.movable.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.movable.bullet.SingleBarrelBullet;
 import com.group17.towerdefense.gameobject.title.Spawner.SampleSpawner;
+import com.group17.towerdefense.gameobject.title.tower.SingleBarrelTower;
+import com.group17.towerdefense.gameobject.title.tower.SingleRocketTower;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.gameobject.movable.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.title.ground.Mountain;
@@ -24,7 +28,13 @@ public class GraphicProcessor {
             Map.entry(SampleEnemy.class, 3),
             Map.entry(SampleTower.class, 4),
             Map.entry(SampleBullet.class, 5),
-            Map.entry(SampleSpawner.class, 6)
+            Map.entry(SampleSpawner.class, 6),
+
+            //Add new towers and new bullets
+            Map.entry(SingleBarrelTower.class, 7),
+            Map.entry(SingleBarrelBullet.class, 8),
+            Map.entry(SingleRocketTower.class, 9),
+            Map.entry(BigRocket.class, 10)
     ));
 
 
@@ -39,7 +49,13 @@ public class GraphicProcessor {
             Map.entry(SampleEnemy.class, new SampleEnemyDrawer()),
             Map.entry(SampleTower.class, new SampleTowerDrawer()),
             Map.entry(SampleBullet.class, new SampleBulletDrawer()),
-            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer())
+            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer()),
+
+            // Add new towers/bullets and their drawer
+            Map.entry(SingleBarrelTower.class, new SingleBarrelTowerDrawer()),
+            Map.entry(SingleBarrelBullet.class, new SingleBarrelBulletDrawer()),
+            Map.entry(SingleRocketTower.class, new SingleRocketTowerDrawer()),
+            Map.entry(BigRocket.class, new BigRocketDrawer())
     ));
 
     public GraphicProcessor(GraphicsContext graphicsContext, GameField gameField) {
