@@ -27,6 +27,7 @@ public class GameGui {
     private Controller gameController;
     private HBox GUILayout;
     private GameFlag choosingTower;
+    private Point choosingPosition;
 
     private Canvas canvas;
     private GraphicsContext graphicsContext;
@@ -34,11 +35,22 @@ public class GameGui {
 
     private static final Image sampleTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile249.png"));
     private static final ImageView sampleTowerIcon = new ImageView(sampleTowerImage);
-
-    public GameGui(Stage gameStage) {
+    static {
         sampleTowerIcon.setFitWidth(Config.ICON_WIDTH);
         sampleTowerIcon.setFitHeight(Config.ICON_HEIGHT);
+    }
+
+    private static final Image sellIcon = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile287.png"));
+    private static final ImageView sellIconView = new ImageView(sellIcon);
+    static {
+        sellIconView.setFitWidth(Config.ICON_WIDTH);
+        sellIconView.setFitHeight(Config.ICON_HEIGHT);
+    }
+
+    public GameGui(Stage gameStage) {
+
         this.windowStage = gameStage;
+        this.choosingPosition = null;
 
         initGame();
     }
@@ -76,6 +88,14 @@ public class GameGui {
         return sampleTowerBtn;
     }
 
+    private Button sellButton() {
+        Button sampleTowerBtn = new Button("Sell", sellIconView);
+        sampleTowerBtn.setOnMouseClicked((e) -> {
+            this.gameController.getGameField().sellChooseTower();
+        });
+        return sampleTowerBtn;
+    }
+
     private GridPane gridLayout() {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -86,7 +106,8 @@ public class GameGui {
         gridPane.add(startButton(), 0, 1, 2, 1);
         gridPane.add(stopButton(), 0, 2, 2, 1);
         gridPane.add(restartButton(), 0, 3, 2, 1);
-        gridPane.add(sampleTower(), 0, 4, 2, 1);
+        gridPane.add(sellButton(), 0, 4, 3,1);
+        gridPane.add(sampleTower(), 0, 5, 2, 1);
         return gridPane;
     }
 
@@ -98,11 +119,16 @@ public class GameGui {
     }
 
     private void handleClickEvent(MouseEvent e) {
-        if (this.choosingTower == null) return;
-        Point fieldPoint = Utility.fromScreenPointToFieldPoint(new Point(e.getX(), e.getY()));
-        this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SAMPLE_TOWER);
+        if (this.choosingTower != null) {
+            Point fieldPoint = Utility.fromScreenPointToFieldPoint(new Point(e.getX(), e.getY()));
+            this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SAMPLE_TOWER);
+            this.choosingTower = null;
+        } else {
+            this.choosingPosition = new Point(e.getX(), e.getY());
+            this.gameController.getGameField().setChoosingPosition(new Point(choosingPosition));
+        }
+
         this.gameController.getGameField().setIsChooseATower(false);
-        this.choosingTower = null;
     }
 
     private HBox getGUILayout() {
@@ -121,7 +147,7 @@ public class GameGui {
         });
 
         canvas.setOnMouseExited((e) -> {
-//            this.gameController.getGameField().setRecentMousePosition(null);
+            this.gameController.getGameField().setRecentMousePosition(null);
         });
         displayGameScreen();
     }

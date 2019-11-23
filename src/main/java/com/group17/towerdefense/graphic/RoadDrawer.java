@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class RoadDrawer implements DrawerEntity {
-    private static final Image roadImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile050.png"));
+    private static final Image roadImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile257.png"));
 
     @Override
     public void draw(GraphicsContext graphicsContext, double posX, double posY, int width, int height, double angle) {

@@ -41,6 +41,12 @@ public class SampleTower extends AbstractTower {
             doAttack();
             countingFrame = 0;
         } else countingFrame ++;
+
+        if (this.gameField.getRemoveTowerPosition() != null && this.gameField.getRemoveTowerPosition().equal(this.fieldPoint)) {
+            this.isExist = false;
+            this.gameField.setRemoveTowerPosition(null);
+            this.gameField.getRecentStage().changeCoins(Config.SAMPLE_TOWER_SELL_PRICE);
+        }
     }
 
     @Override
