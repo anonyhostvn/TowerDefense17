@@ -18,11 +18,14 @@ public class GameField {
     private GameStage recentStage;
     private Queue<GameEntity> allGameEntity;
     private List<GameEntity> addingGameEntity;
-    private long ticks;
     private AbstractEntityFactory entityFactory;
     private AbstractSpawner recentSpawner;
     private Point recentMousePosition;
     private boolean isChooseATower;
+    private Point choosingPosition;
+    private Point removeTowerPosition = null;
+
+    private long ticks;
 
     public GameField(GameStage gameStage) {
         ticks = 0;
@@ -44,6 +47,7 @@ public class GameField {
         recentMousePosition = null;
         this.isChooseATower = false;
         this.addingGameEntity = new ArrayList<GameEntity>();
+        this.choosingPosition = null;
     }
 
     private void checkEnemyReachGoal() {
@@ -76,9 +80,7 @@ public class GameField {
             allGameEntity.remove(removedEntity);
         }
 
-        for (GameEntity addEntity : addingGameEntity) {
-            allGameEntity.add(addEntity);
-        }
+        allGameEntity.addAll(addingGameEntity);
 
         addingGameEntity.clear();
     }
@@ -111,15 +113,44 @@ public class GameField {
         return this.recentStage;
     }
 
+    public void setChoosingPosition(Point position) {
+        this.choosingPosition = position;
+    }
+
+    public Point getChoosingPosition() {
+        return this.choosingPosition;
+    }
+
+    public void sellChoosingPosition() {
+        Point fieldPoint = Utility.fromScreenPointToFieldPoint(this.choosingPosition);
+    }
+
+    public void sellChooseTower() {
+        if (this.getChoosingPosition() == null) return;
+        Point fieldPosition = Utility.fromScreenPointToFieldPoint(this.getChoosingPosition());
+        this.setRemoveTowerPosition(fieldPosition);
+    }
+
+    public void setRemoveTowerPosition(Point position) {
+        this.removeTowerPosition = position;
+    }
+
+    public Point getRemoveTowerPosition() {
+        return this.removeTowerPosition;
+    }
+
     public void createNewTower(Point fieldPoint, GameFlag tower) {
+        this.setChoosingPosition(null);
         int X = (int) fieldPoint.getX(), Y = (int) fieldPoint.getY();
         GameFlag obj = recentStage.getMapIn(Y,X);
-        if (tower == GameFlag.SAMPLE_TOWER) {
-            if (obj == GameFlag.MOUNTAIN){
+        if (obj == GameFlag.MOUNTAIN){
+
+            if (tower == GameFlag.SAMPLE_TOWER && recentStage.getCoins() >= Config.SAMPLE_TOWER_PRICE) {
                 addEntity(entityFactory.createTowerFactory().createSampleTower(fieldPoint));
                 recentStage.setMap(Y,X,GameFlag.SAMPLE_TOWER);
                 this.getRecentStage().changeCoins(-Config.SAMPLE_TOWER_PRICE);
             }
+
         }
     }
 }

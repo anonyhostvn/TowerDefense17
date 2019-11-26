@@ -85,6 +85,10 @@ public class GameStage {
         return this.health != 0;
     }
 
+    public void sellTower(int x, int y) {
+        this.map[x][y] = GameFlag.MOUNTAIN;
+    }
+
     public boolean isLose() {
         return this.health == 0;
     }

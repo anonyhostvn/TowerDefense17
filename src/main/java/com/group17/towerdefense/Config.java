@@ -25,6 +25,7 @@ public final class Config {
     public static final int SAMPLE_TOWER_RANGE = 100;
     public static final int SAMPLE_TOWER_FRAME_GAP = 200;
     public static final int SAMPLE_TOWER_PRICE = 40;
+    public static final int SAMPLE_TOWER_SELL_PRICE = 20;
 
     public static final double SAMPLE_ENEMY_ABS_VELOCITY = 0.7;
     public static final int SAMPLE_ENEMY_INIT_HEALTH = 20;
@@ -47,8 +48,8 @@ public final class Config {
             Map.entry(Road.class, 2),
             Map.entry(SampleEnemy.class, 3),
             Map.entry(SampleTower.class, 4),
-            Map.entry(SampleBullet.class, 5),
-            Map.entry(SampleSpawner.class, 6)
+            Map.entry(SampleSpawner.class, 5),
+            Map.entry(SampleBullet.class, 6)
     ));
 
 
