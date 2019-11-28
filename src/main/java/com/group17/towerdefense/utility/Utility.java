@@ -6,11 +6,9 @@ import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.mesurement.PolarVector;
 import com.group17.towerdefense.mesurement.TurningPoint;
 import com.group17.towerdefense.repositories.entity.GameEntity;
-import com.group17.towerdefense.repositories.entity.GameTile;
 import com.group17.towerdefense.repositories.entity.MovableEntity;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -28,6 +26,10 @@ public class Utility {
     public static double calculateDistance(GameEntity o1, GameEntity o2) {
         double disX = o1.getPosX() - o2.getPosX(), disY = o1.getPosY() - o2.getPosY();
         return Math.sqrt(disX * disX + disY * disY);
+    }
+
+    public static Point getTopLeftPositionOfBlock(Point position) {
+        return fromFieldPointToScreenPoint(fromScreenPointToFieldPoint(position));
     }
 
     public static Image rotateImage(Image img, double angle) {

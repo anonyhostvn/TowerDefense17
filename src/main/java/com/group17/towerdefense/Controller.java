@@ -1,5 +1,6 @@
 package com.group17.towerdefense;
 
+import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.gamemanager.GameStage;
 import com.group17.towerdefense.gamemanager.GraphicProcessor;
@@ -65,6 +66,7 @@ public class Controller extends AnimationTimer {
 
     @Override
     public void handle(long l) {
+        if (this.getGameStage().gameStatus() != GameFlag.GAME_CONTINUE) return;
         gameField.tick();
         graphicProcessor.render();
     }

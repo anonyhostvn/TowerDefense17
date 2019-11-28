@@ -15,6 +15,7 @@ public class GameStage {
     private long score;
     private TurningPoint[] turningPoints;
     private int[] listEnemy;
+    private int remainEnemy;
 
     private int health, coins;
 
@@ -48,7 +49,7 @@ public class GameStage {
             int cntEnemy = scannerInp.nextInt();
             listEnemy = new int[cntEnemy];
             for (int i = 0; i < cntEnemy; i++) listEnemy[i] = scannerInp.nextInt();
-
+            this.remainEnemy = listEnemy.length;
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Resource not found");
@@ -57,6 +58,16 @@ public class GameStage {
 
     public void doUpdate() {
 
+    }
+
+    public void destroyEnemy() {
+        this.remainEnemy --;
+    }
+
+    public GameFlag gameStatus(){
+        if (this.health > 0 && this.remainEnemy == 0) return GameFlag.GAME_WIN;
+        else if (this.health <= 0) return GameFlag.GAME_LOOSE;
+        return GameFlag.GAME_CONTINUE;
     }
 
     public int[] getListEnemy() {
@@ -72,6 +83,10 @@ public class GameStage {
     public boolean decreaseHealth() {
         this.health --;
         return this.health != 0;
+    }
+
+    public void sellTower(int x, int y) {
+        this.map[x][y] = GameFlag.MOUNTAIN;
     }
 
     public boolean isLose() {

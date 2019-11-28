@@ -1,5 +1,20 @@
 package com.group17.towerdefense;
 
+import com.group17.towerdefense.gameobject.bullet.BigRocket;
+import com.group17.towerdefense.gameobject.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.bullet.SingleBarrelBullet;
+import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
+import com.group17.towerdefense.gameobject.ground.Mountain;
+import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
+import com.group17.towerdefense.gameobject.tower.SampleTower;
+import com.group17.towerdefense.gameobject.tower.SingleBarrelTower;
+import com.group17.towerdefense.repositories.entity.GameEntity;
+import com.group17.towerdefense.gameobject.tower.SingleRocketTower;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public final class Config {
     public static final String GAME_NAME = "Tower Defense";
 
@@ -9,12 +24,12 @@ public final class Config {
     public static final int SCREEN_HEIGHT_RATIO = 40;
     public static final int GAME_TPS = 20;
     public static final long GAME_NSPT = Math.round(1000000000.0 / GAME_TPS);
-    public static final int MAX_ENTITY = 300;
 
     public static final int SAMPLE_TOWER_DPS = 20;
     public static final int SAMPLE_TOWER_RANGE = 100;
     public static final int SAMPLE_TOWER_FRAME_GAP = 200;
     public static final int SAMPLE_TOWER_PRICE = 40;
+    public static final int SAMPLE_TOWER_SELL_PRICE = 20;
 
     //Add configuration for single-barrel tower
     public static final double SINGLE_BARREL_TOWER_DPS = 20;
@@ -28,7 +43,7 @@ public final class Config {
     public static final double SINGLE_ROCKET_TOWER_FRAME_GAP = 200;
     public static final int SINGLE_ROCKET_TOWER_PRICE = 75;
 
-    public static final double SAMPLE_ENEMY_ABS_VELOCITY = 0.5;
+    public static final double SAMPLE_ENEMY_ABS_VELOCITY = 0.7;
     public static final int SAMPLE_ENEMY_INIT_HEALTH = 20;
     public static final int SAMPLE_ENEMY_WIDTH = 40;
     public static final int SAMPLE_ENEMY_HEIGHT = 40;
@@ -56,6 +71,21 @@ public final class Config {
     public static final int ICON_WIDTH = 50;
     public static final int ICON_HEIGHT = 50;
 
-    public static final int GAME_STAGE_GUI_WIDTH = 200;
-    public static final int GAME_STAGE_GUI_HEIGHT = 50;
+    public static final Map<Class<? extends GameEntity>, Integer> entityOrder = new HashMap<Class<? extends GameEntity>, Integer>(Map.ofEntries(
+            Map.entry(Mountain.class, 1),
+            Map.entry(Road.class, 2),
+            Map.entry(SampleEnemy.class, 3),
+            Map.entry(SampleTower.class, 4),
+            Map.entry(SampleSpawner.class, 5),
+            Map.entry(SampleBullet.class, 6),
+            Map.entry(SingleBarrelTower.class, 7),
+            Map.entry(SingleBarrelBullet.class, 8),
+            Map.entry(SingleRocketTower.class, 9),
+            Map.entry(BigRocket.class, 10)
+    ));
+
+
+    public static final int entityOrderComparator(GameEntity A , GameEntity B) {
+        return Integer.compare(entityOrder.get(A.getClass()), entityOrder.get(B.getClass()));
+    }
 }

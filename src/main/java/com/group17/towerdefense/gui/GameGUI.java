@@ -126,13 +126,13 @@ public class GameGUI {
             this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SAMPLE_TOWER);
         }
 
-        /* (for test only)
+        /* (for test only)*/
         if(this.choosingTower == GameFlag.SINGLE_BARREL_TOWER) {
             this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SINGLE_BARREL_TOWER);
         }
         if(this.choosingTower == GameFlag.SINGLE_ROCKET_TOWER) {
             this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SINGLE_ROCKET_TOWER);
-        }*/
+        }
         this.choosingTower = null;
     }
 

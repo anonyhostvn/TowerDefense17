@@ -1,9 +1,9 @@
 package com.group17.towerdefense.abstractfactory;
 
 import com.group17.towerdefense.gamemanager.GameField;
-import com.group17.towerdefense.gameobject.title.tower.SampleTower;
-import com.group17.towerdefense.gameobject.title.tower.SingleBarrelTower;
-import com.group17.towerdefense.gameobject.title.tower.SingleRocketTower;
+import com.group17.towerdefense.gameobject.tower.SampleTower;
+import com.group17.towerdefense.gameobject.tower.SingleBarrelTower;
+import com.group17.towerdefense.gameobject.tower.SingleRocketTower;
 import com.group17.towerdefense.mesurement.Point;
 
 public class TowerFactory extends AbstractEntityFactory {
