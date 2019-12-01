@@ -4,6 +4,7 @@ import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gameobject.bullet.SampleBullet;
 import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
+import com.group17.towerdefense.gameobject.enemy.TankerEnemy;
 import com.group17.towerdefense.gameobject.ground.Mountain;
 import com.group17.towerdefense.gameobject.ground.Road;
 import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
@@ -26,7 +27,8 @@ public class GraphicProcessor {
             Map.entry(SampleEnemy.class, 3),
             Map.entry(SampleTower.class, 4),
             Map.entry(SampleBullet.class, 5),
-            Map.entry(SampleSpawner.class, 6)
+            Map.entry(SampleSpawner.class, 6),
+            Map.entry(TankerEnemy.class, 7)
     ));
 
 
@@ -41,7 +43,8 @@ public class GraphicProcessor {
             Map.entry(SampleEnemy.class, new SampleEnemyDrawer()),
             Map.entry(SampleTower.class, new SampleTowerDrawer()),
             Map.entry(SampleBullet.class, new SampleBulletDrawer()),
-            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer())
+            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer()),
+            Map.entry(TankerEnemy.class, new TankerEnemyDrawer())
     ));
 
     public GraphicProcessor(GraphicsContext graphicsContext, GameField gameField) {
@@ -65,6 +68,7 @@ public class GraphicProcessor {
 
         graphicsContext.fillText("Coins: " + this.gameField.getRecentStage().getCoins(), 20, 20);
         graphicsContext.fillText("Health: " + this.gameField.getRecentStage().getHealth(), 20, 40);
+        graphicsContext.fillText("Level: " + this.gameField.getRecentStage().getLevel(), 20, 60);
 
         if (this.gameField.getRecentStage().gameStatus() == GameFlag.GAME_LOOSE) {
             graphicsContext.fillText("Game Over", Config.SCREEN_WIDTH / 2 , Config.SCREEN_HEIGHT / 2);

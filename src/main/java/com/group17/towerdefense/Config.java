@@ -15,12 +15,21 @@ public final class Config {
     public static final int SAMPLE_TOWER_FRAME_GAP = 200;
     public static final int SAMPLE_TOWER_PRICE = 40;
 
+    // SUPPLEMENT ENEMY
     public static final double SAMPLE_ENEMY_ABS_VELOCITY = 0.7;
     public static final int SAMPLE_ENEMY_INIT_HEALTH = 20;
     public static final int SAMPLE_ENEMY_WIDTH = 40;
     public static final int SAMPLE_ENEMY_HEIGHT = 40;
     public static final int SAMPLE_ENEMY_AWARD = 20;
 
+    public static final double TANKER_ENEMY_ABS_VELOCITY = 0.7;
+    public static final int TANKER_ENEMY_INIT_HEALTH = 100;
+    public static final int TANKER_ENEMY_WIDTH = 60;
+    public static final int TANKER_ENEMY_HEIGHT = 60;
+    public static final int TANKER_ENEMY_AWARD = 100;
+
+
+    // BULLET
     public static final double SAMPLE_BULLET_ABS_VELOCITY = 1;
     public static final int SAMPLE_BULLET_DAMAGE = 10;
     public static final double SAMPLE_BULLET_WIDTH = 40;

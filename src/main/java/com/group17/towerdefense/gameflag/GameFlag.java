@@ -6,5 +6,6 @@ public enum GameFlag {
     SAMPLE_TOWER,
     GAME_CONTINUE,
     GAME_WIN,
-    GAME_LOOSE
+    GAME_LOOSE,
+    LEVEL_UP;
 }

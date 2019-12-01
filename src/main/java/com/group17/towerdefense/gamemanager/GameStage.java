@@ -12,12 +12,12 @@ public class GameStage {
     private Point startPoint;
     private int width;
     private int height;
-    private long score;
     private TurningPoint[] turningPoints;
     private int[] listEnemy;
     private int remainEnemy;
 
     private int health, coins;
+    private int level;
 
     public GameStage() {
         try {
@@ -35,10 +35,11 @@ public class GameStage {
                     int temp = scannerInp.nextInt();
                     if (temp == 0) map[i][j] = GameFlag.MOUNTAIN;
                     else map[i][j] = GameFlag.ROAD;
-//                    map[i][j] = scannerInp.nextInt();
+//                  map[i][j] = scannerInp.nextInt();
                 }
             this.health = 5;
             this.coins = 100;
+            this.level = 1;
 
             int cntTurningPoint = scannerInp.nextInt();
             turningPoints = new TurningPoint[cntTurningPoint];
@@ -48,7 +49,9 @@ public class GameStage {
 
             int cntEnemy = scannerInp.nextInt();
             listEnemy = new int[cntEnemy];
-            for (int i = 0; i < cntEnemy; i++) listEnemy[i] = scannerInp.nextInt();
+            for (int i = 0; i < cntEnemy; i++) {
+                listEnemy[i] = scannerInp.nextInt();
+            }
             this.remainEnemy = listEnemy.length;
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,13 +68,17 @@ public class GameStage {
     }
 
     public GameFlag gameStatus(){
-        if (this.health > 0 && this.remainEnemy == 0) return GameFlag.GAME_WIN;
+        if (this.health > 0 && this.remainEnemy == 0) return GameFlag.LEVEL_UP;
         else if (this.health <= 0) return GameFlag.GAME_LOOSE;
         return GameFlag.GAME_CONTINUE;
     }
 
     public int[] getListEnemy() {
         return listEnemy;
+    }
+
+    public void increaseLevel() {
+        this.level ++;
     }
 
     public boolean changeCoins(int changeCoins) {
@@ -89,8 +96,8 @@ public class GameStage {
         return this.health == 0;
     }
 
-    public long getScore() {
-        return this.score;
+    public long getLevel() {
+        return this.level;
     }
 
     public int getHealth() {

@@ -77,9 +77,21 @@ public class SampleSpawner extends AbstractSpawner{
         this.incFrameCount();
         if (this.getFrameCount() >= this.getFrameGap()) {
             this.resetFrameCount();
-            if (cnt < listEnemy.length && listEnemy[cnt] == 0) {
+            /*if (cnt < listEnemy.length && listEnemy[cnt] == 0) {
                 cnt++;
                 this.recentGameField.addEntity(enemyFactory.createSampleEnemy(position));
+            }*/
+            if (cnt < listEnemy.length) {
+                switch (listEnemy[cnt]) {
+                    case 0:
+                        this.recentGameField.addEntity(enemyFactory.createSampleEnemy(position));
+                        break;
+                    case 1:
+                        this.recentGameField.addEntity(enemyFactory.createTankerEnemy(position));
+                        break;
+
+                }
+                cnt++;
             }
         }
     }
