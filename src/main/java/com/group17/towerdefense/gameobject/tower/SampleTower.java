@@ -4,6 +4,7 @@ import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.gameobject.bullet.AbstractBullet;
 import com.group17.towerdefense.gameobject.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.enemy.BossEnemy;
 import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.enemy.TankerEnemy;
 import com.group17.towerdefense.mesurement.Point;
@@ -64,7 +65,8 @@ public class SampleTower extends AbstractTower {
         return new ArrayList<Class<? extends GameEntity>>(
                 List.of(
                         SampleEnemy.class,
-                        TankerEnemy.class
+                        TankerEnemy.class,
+                        BossEnemy.class
                 )
         );
     }

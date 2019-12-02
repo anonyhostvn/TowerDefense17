@@ -22,12 +22,23 @@ public final class Config {
     public static final int SAMPLE_ENEMY_HEIGHT = 40;
     public static final int SAMPLE_ENEMY_AWARD = 20;
 
-    public static final double TANKER_ENEMY_ABS_VELOCITY = 0.7;
-    public static final int TANKER_ENEMY_INIT_HEALTH = 100;
-    public static final int TANKER_ENEMY_WIDTH = 60;
-    public static final int TANKER_ENEMY_HEIGHT = 60;
-    public static final int TANKER_ENEMY_AWARD = 100;
+    public static final double TANKER_ENEMY_ABS_VELOCITY = 0.5;
+    public static final int TANKER_ENEMY_INIT_HEALTH = 60;
+    public static final int TANKER_ENEMY_WIDTH = 45;
+    public static final int TANKER_ENEMY_HEIGHT = 45;
+    public static final int TANKER_ENEMY_AWARD = 50;
 
+    public static final double BOSS_ENEMY_ABS_VELOCITY = 0.4;
+    public static final int BOSS_ENEMY_INIT_HEALTH = 150;
+    public static final int BOSS_ENEMY_WIDTH = 40;
+    public static final int BOSS_ENEMY_HEIGHT = 40;
+    public static final int BOSS_ENEMY_AWARD = 150;
+
+    public static final double PLANE_ENEMY_ABS_VELOCITY = 1.0;
+    public static final int PLANE_ENEMY_INIT_HEALTH = 20;
+    public static final int PLANE_ENEMY_WIDTH = 40;
+    public static final int PLANE_ENEMY_HEIGHT = 40;
+    public static final int PLANE_ENEMY_AWARD = 30;
 
     // BULLET
     public static final double SAMPLE_BULLET_ABS_VELOCITY = 1;

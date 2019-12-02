@@ -1,4 +1,70 @@
 package com.group17.towerdefense.gameobject.enemy;
 
-public abstract class AbstractAirEnemy {
+import com.group17.towerdefense.gamemanager.GameField;
+import com.group17.towerdefense.mesurement.DescartesVector;
+import com.group17.towerdefense.mesurement.Point;
+import com.group17.towerdefense.mesurement.PolarVector;
+import com.group17.towerdefense.repositories.entity.DestroyableEntity;
+import com.group17.towerdefense.repositories.entity.MovableEntity;
+
+import javax.security.auth.Destroyable;
+
+public abstract class AbstractAirEnemy implements DestroyableEntity, MovableEntity {
+    protected double absVelocity;
+    protected double width, height;
+    protected Point position;
+    protected DescartesVector vectorVelocity;
+    protected int health;
+    protected GameField recentGameField;
+
+    @Override
+    public double getAbsVelocity() {
+        return absVelocity;
+    }
+
+    @Override
+    public double getPosX() {
+        return position.getX();
+    }
+
+    @Override
+    public double getPosY() {
+        return position.getY();
+    }
+
+    @Override
+    public double getHeight() {
+        return height;
+    }
+
+    @Override
+    public double getWidth() {
+        return width;
+    }
+
+    @Override
+    public void setVectorVelocity(DescartesVector descartesVector) {
+        this.vectorVelocity = new DescartesVector(descartesVector);
+    }
+
+    @Override
+    public DescartesVector getVectorVelocity() {
+        return this.vectorVelocity;
+    }
+
+    @Override
+    public int getHealth() {
+        return this.health;
+    }
+
+    @Override
+    public boolean isExist() {
+        return health > 0;
+    }
+
+    @Override
+    public double getAngle() {
+        PolarVector polarVector = new PolarVector(this.vectorVelocity);
+        return Math.toDegrees(polarVector.getFi());
+    }
 }

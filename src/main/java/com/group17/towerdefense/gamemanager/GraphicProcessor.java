@@ -3,6 +3,8 @@ package com.group17.towerdefense.gamemanager;
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gameobject.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.enemy.BossEnemy;
+import com.group17.towerdefense.gameobject.enemy.PlaneEnemy;
 import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.enemy.TankerEnemy;
 import com.group17.towerdefense.gameobject.ground.Mountain;
@@ -28,7 +30,9 @@ public class GraphicProcessor {
             Map.entry(SampleTower.class, 4),
             Map.entry(SampleBullet.class, 5),
             Map.entry(SampleSpawner.class, 6),
-            Map.entry(TankerEnemy.class, 7)
+            Map.entry(TankerEnemy.class, 7),
+            Map.entry(BossEnemy.class, 8),
+            Map.entry(PlaneEnemy.class, 9)
     ));
 
 
@@ -44,7 +48,9 @@ public class GraphicProcessor {
             Map.entry(SampleTower.class, new SampleTowerDrawer()),
             Map.entry(SampleBullet.class, new SampleBulletDrawer()),
             Map.entry(SampleSpawner.class, new SampleSpawnerDrawer()),
-            Map.entry(TankerEnemy.class, new TankerEnemyDrawer())
+            Map.entry(TankerEnemy.class, new TankerEnemyDrawer()),
+            Map.entry(BossEnemy.class, new BossEnemyDrawer()),
+            Map.entry(PlaneEnemy.class, new PlaneEnemyDrawer())
     ));
 
     public GraphicProcessor(GraphicsContext graphicsContext, GameField gameField) {
