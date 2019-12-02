@@ -95,7 +95,8 @@ public class SampleSpawner extends AbstractSpawner{
                     case 3:
                         this.recentGameField.addEntity(enemyFactory.createBossEnemy(position));
                         break;
-
+                    case 4:
+                        this.recentGameField.addEntity(enemyFactory.createJetPlaneEnemy(position));
                 }
                 cnt++;
             }
