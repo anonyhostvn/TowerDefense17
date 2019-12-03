@@ -151,6 +151,29 @@ public class GameField {
                 this.getRecentStage().changeCoins(-Config.SAMPLE_TOWER_PRICE);
             }
 
+            else if (tower == GameFlag.SINGLE_BARREL_TOWER && recentStage.getCoins() >= Config.SINGLE_BARREL_TOWER_PRICE) {
+                addEntity(entityFactory.createTowerFactory().createSBarrelTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.SINGLE_BARREL_TOWER);
+                this.getRecentStage().changeCoins(-Config.SINGLE_BARREL_TOWER_PRICE);
+            }
+
+            else if (tower == GameFlag.DOUBLE_BARREL_TOWER && recentStage.getCoins() >= Config.DOUBLE_BARREL_TOWER_PRICE) {
+                addEntity(entityFactory.createTowerFactory().createDBarrelTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.DOUBLE_BARREL_TOWER);
+                this.getRecentStage().changeCoins(-Config.DOUBLE_BARREL_TOWER_PRICE);
+            }
+
+            else if (tower == GameFlag.SINGLE_ROCKET_TOWER && recentStage.getCoins() >= Config.SINGLE_ROCKET_TOWER_PRICE) {
+                addEntity(entityFactory.createTowerFactory().createSRocketTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.SINGLE_ROCKET_TOWER);
+                this.getRecentStage().changeCoins(-Config.SINGLE_ROCKET_TOWER_PRICE);
+            }
+
+            else if (tower == GameFlag.DOUBLE_ROCKET_TOWER && recentStage.getCoins() >= Config.DOUBLE_ROCKET_TOWER_PRICE) {
+                addEntity(entityFactory.createTowerFactory().createDRocketTower(fieldPoint));
+                recentStage.setMap(Y,X,GameFlag.DOUBLE_ROCKET_TOWER);
+                this.getRecentStage().changeCoins(-Config.DOUBLE_ROCKET_TOWER_PRICE);
+            }
         }
     }
 }

@@ -33,12 +33,46 @@ public class GameGui {
     private GraphicsContext graphicsContext;
     private Stage windowStage;
 
+    // SAMPLE TOWER
     private static final Image sampleTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile249.png"));
     private static final ImageView sampleTowerIcon = new ImageView(sampleTowerImage);
     static {
         sampleTowerIcon.setFitWidth(Config.ICON_WIDTH);
         sampleTowerIcon.setFitHeight(Config.ICON_HEIGHT);
     }
+
+    // SINGLE-BARREL TOWER
+    private static final Image SBarrelTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile249.png"));
+    private static final ImageView SBarrelTowerIcon = new ImageView(SBarrelTowerImage);
+    static {
+        SBarrelTowerIcon.setFitWidth(Config.ICON_WIDTH);
+        SBarrelTowerIcon.setFitHeight(Config.ICON_HEIGHT);
+    }
+
+    // DOUBLE-BARREL TOWER
+    private static final Image DBarrelTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile250.png"));
+    private static final ImageView DBarrelTowerIcon = new ImageView(DBarrelTowerImage);
+    static {
+        DBarrelTowerIcon.setFitWidth(Config.ICON_WIDTH);
+        DBarrelTowerIcon.setFitHeight(Config.ICON_HEIGHT);
+    }
+
+    // SINGLE-ROCKET TOWER
+    private static final Image SRocketTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile206.png"));
+    private static final ImageView SRocketTowerIcon = new ImageView(SRocketTowerImage);
+    static {
+        SRocketTowerIcon.setFitWidth(Config.ICON_WIDTH);
+        SRocketTowerIcon.setFitHeight(Config.ICON_HEIGHT);
+    }
+
+    // DOUBLE-ROCKET TOWER
+    private static final Image DRocketTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile205.png"));
+    private static final ImageView DRocketTowerIcon = new ImageView(DRocketTowerImage);
+    static {
+        DRocketTowerIcon.setFitWidth(Config.ICON_WIDTH);
+        DRocketTowerIcon.setFitHeight(Config.ICON_HEIGHT);
+    }
+
 
     private static final Image sellIcon = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile287.png"));
     private static final ImageView sellIconView = new ImageView(sellIcon);
@@ -88,6 +122,46 @@ public class GameGui {
         return sampleTowerBtn;
     }
 
+    // SINGLE-BARREL TOWER
+    private Button SBarrelTower() {
+        Button SBarrelTowerBtn = new Button("30 Coins", SBarrelTowerIcon);
+        SBarrelTowerBtn.setOnMouseClicked((e) -> {
+            this.choosingTower = GameFlag.SINGLE_BARREL_TOWER;
+            this.gameController.getGameField().setIsChooseATower(true);
+        });
+        return SBarrelTowerBtn;
+    }
+
+    // DOUBLE-BARREL TOWER
+    private Button DBarrelTower() {
+        Button DBarrelTowerBtn = new Button("50 Coins", DBarrelTowerIcon);
+        DBarrelTowerBtn.setOnMouseClicked((e) -> {
+            this.choosingTower = GameFlag.DOUBLE_BARREL_TOWER;
+            this.gameController.getGameField().setIsChooseATower(true);
+        });
+        return DBarrelTowerBtn;
+    }
+
+    // SINGLE-ROCKET TOWER
+    private Button SRocketTower() {
+        Button SRocketTowerBtn = new Button("120 Coins", SRocketTowerIcon);
+        SRocketTowerBtn.setOnMouseClicked((e) -> {
+            this.choosingTower = GameFlag.SINGLE_ROCKET_TOWER;
+            this.gameController.getGameField().setIsChooseATower(true);
+        });
+        return SRocketTowerBtn;
+    }
+
+    // DOUBLE-ROCKET TOWER
+    private Button DRocketTower() {
+        Button DRocketTowerBtn = new Button("80 Coins", DRocketTowerIcon);
+        DRocketTowerBtn.setOnMouseClicked((e) -> {
+            this.choosingTower = GameFlag.DOUBLE_ROCKET_TOWER;
+            this.gameController.getGameField().setIsChooseATower(true);
+        });
+        return DRocketTowerBtn;
+    }
+
     private Button sellButton() {
         Button sampleTowerBtn = new Button("Sell", sellIconView);
         sampleTowerBtn.setOnMouseClicked((e) -> {
@@ -108,6 +182,10 @@ public class GameGui {
         gridPane.add(restartButton(), 0, 3, 2, 1);
         gridPane.add(sellButton(), 0, 4, 3,1);
         gridPane.add(sampleTower(), 0, 5, 2, 1);
+        gridPane.add(SBarrelTower(), 0, 6, 1, 1);
+        gridPane.add(DBarrelTower(), 1, 6, 1, 1);
+        gridPane.add(SRocketTower(), 0, 7, 1, 1);
+        gridPane.add(DRocketTower(), 1, 7, 1, 1);
         return gridPane;
     }
 
@@ -121,7 +199,7 @@ public class GameGui {
     private void handleClickEvent(MouseEvent e) {
         if (this.choosingTower != null) {
             Point fieldPoint = Utility.fromScreenPointToFieldPoint(new Point(e.getX(), e.getY()));
-            this.gameController.getGameField().createNewTower(fieldPoint, GameFlag.SAMPLE_TOWER);
+            this.gameController.getGameField().createNewTower(fieldPoint, this.choosingTower);
             this.choosingTower = null;
         } else {
             this.choosingPosition = new Point(e.getX(), e.getY());

@@ -2,19 +2,18 @@ package com.group17.towerdefense.gamemanager;
 
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameflag.GameFlag;
-import com.group17.towerdefense.gameobject.bullet.SampleBullet;
+import com.group17.towerdefense.gameobject.bullet.*;
 import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.ground.Mountain;
 import com.group17.towerdefense.gameobject.ground.Road;
 import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
-import com.group17.towerdefense.gameobject.tower.SampleTower;
+import com.group17.towerdefense.gameobject.tower.*;
 import com.group17.towerdefense.graphic.*;
 import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.utility.Utility;
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +27,15 @@ public class GraphicProcessor {
             Map.entry(SampleEnemy.class, new SampleEnemyDrawer()),
             Map.entry(SampleTower.class, new SampleTowerDrawer()),
             Map.entry(SampleBullet.class, new SampleBulletDrawer()),
-            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer())
+            Map.entry(SampleSpawner.class, new SampleSpawnerDrawer()),
+            Map.entry(SBarrelTower.class, new SBarrelTowerDrawer()),
+            Map.entry(Bullet_1.class, new Bullet_1_Drawer()),
+            Map.entry(DBarrelTower.class, new DBarrelTowerDrawer()),
+            Map.entry(Bullet_2.class, new Bullet_2_Drawer()),
+            Map.entry(SRocketTower.class, new SRocketTowerDrawer()),
+            Map.entry(BigRocket.class, new BigRocketDrawer()),
+            Map.entry(DRocketTower.class, new DRocketTowerDrawer()),
+            Map.entry(Rocket.class, new RocketDrawer())
     ));
 
     private final DrawerEntity hoverRectDrawer = new HoverRectangleDrawer();
