@@ -59,8 +59,23 @@ public class SBarrelTower extends AbstractTower{
                 }
             }
 
-        if (targetObj != null)
-            this.gameField.addEntity(new Bullet_1(new Point(getPosX(), getPosY()), targetObj));
+        if (targetObj != null) {
+            double toBarrelHeadX;
+            double toBarrelHeadY;
+            if(this.getAngle() >= -90 && this.getAngle() <= 90) {
+                toBarrelHeadX = 20 * Math.sin(Math.toRadians(this.getAngle()));
+                toBarrelHeadY = -20 * Math.cos(Math.toRadians(this.getAngle()));
+            }
+            else if(this.getAngle() > 90 && this.getAngle() <= 180) {
+                toBarrelHeadX = 20 * Math.sin(Math.toRadians(this.getAngle()));
+                toBarrelHeadY = 20 * Math.cos(Math.toRadians(180 - this.getAngle()));
+            }
+            else {
+                toBarrelHeadX = -20 * Math.sin(Math.toRadians(this.getAngle() - 180));
+                toBarrelHeadY = 20 * Math.cos(Math.toRadians(this.getAngle() - 180));
+            }
+            this.gameField.addEntity(new Bullet_1(new Point(this.getPosX() + toBarrelHeadX, this.getPosY() + toBarrelHeadY), targetObj));
+        }
     }
 
     @Override

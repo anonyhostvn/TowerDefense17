@@ -12,6 +12,7 @@ import com.group17.towerdefense.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class DRocketTower extends AbstractTower{
     private final Class<? extends AbstractBullet> ownBulletClass = Rocket.class;
@@ -59,8 +60,31 @@ public class DRocketTower extends AbstractTower{
                 }
             }
 
-        if (targetObj != null)
-            this.gameField.addEntity(new Rocket(new Point(getPosX(), getPosY()), targetObj));
+        if (targetObj != null) {
+            double toBarrelHeadX;
+            double toBarrelHeadY;
+            if(this.getAngle() > 0 && this.getAngle() <= 90) {
+                toBarrelHeadX = 5 * Math.sin(Math.toRadians(90 - this.getAngle()));
+                toBarrelHeadY = 5 * Math.cos(Math.toRadians(90 - this.getAngle()));
+            }
+            else if(this.getAngle() > -90 && this.getAngle() <= 0) {
+                toBarrelHeadX = 5 * Math.cos(Math.toRadians(-this.getAngle()));
+                toBarrelHeadY = -5 * Math.sin(Math.toRadians(-this.getAngle()));
+            }
+            else if(this.getAngle() > 90 && this.getAngle() <= 180) {
+                toBarrelHeadX = -5 * Math.sin(Math.toRadians(this.getAngle() - 90));
+                toBarrelHeadY = 5 * Math.cos(Math.toRadians(this.getAngle() - 90));
+            }
+            else {
+                toBarrelHeadX = -5 * Math.sin(Math.toRadians(270 - this.getAngle()));
+                toBarrelHeadY = -5 * Math.cos(Math.toRadians(270 - this.getAngle()));
+            }
+            Random r = new Random();
+            int n = r.nextInt() % 2;
+            if(n == 0)
+                this.gameField.addEntity(new Rocket(new Point(this.getPosX() + toBarrelHeadX, this.getPosY() + toBarrelHeadY), targetObj));
+            else this.gameField.addEntity(new Rocket(new Point(this.getPosX() - toBarrelHeadX, this.getPosY() - toBarrelHeadY), targetObj));
+        }
     }
 
     @Override
