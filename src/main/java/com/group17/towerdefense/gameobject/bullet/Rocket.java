@@ -8,11 +8,18 @@ import com.group17.towerdefense.repositories.entity.DestroyableEntity;
 import com.group17.towerdefense.repositories.entity.FireableSingleEntity;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.utility.Utility;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Rocket extends AbstractBullet implements FireableSingleEntity {
     private GameEntity target;
 
+    private final Media soundFire = new Media(Bullet_1.class.getResource("/sound/rocket.mp3").toString());
+    private final MediaPlayer soundFirePlayer = new MediaPlayer(soundFire);
+
     public Rocket(Point position, GameEntity target) {
+        soundFirePlayer.play();
+
         this.width = Config.ROCKET_WIDTH;
         this.height = Config.ROCKET_HEIGHT;
         this.absVelocity = Config.ROCKET_ABS_VELOCITY;

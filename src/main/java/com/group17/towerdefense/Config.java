@@ -156,7 +156,8 @@ public final class Config {
 
     public static final Map<String, String> mapNameConst = new HashMap<String, String>(Map.ofEntries(
             new AbstractMap.SimpleEntry<String, String>("HANOI", "Hà Nội"),
-            new AbstractMap.SimpleEntry<String, String>("HCM", "TP.HCM")
+            new AbstractMap.SimpleEntry<String, String>("HCM", "TP.HCM"),
+            new AbstractMap.SimpleEntry<String, String>("HP", "Hải Phòng")
     ));
 
     public static final int entityOrderComparator(GameEntity A , GameEntity B) {

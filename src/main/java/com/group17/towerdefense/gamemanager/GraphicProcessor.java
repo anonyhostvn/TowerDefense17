@@ -66,6 +66,11 @@ public class GraphicProcessor {
             rangeDrawer.draw(graphicsContext, drawerPosition.getX() + Config.SCREEN_HEIGHT_RATIO/ 2  - range / 2, drawerPosition.getY() + Config.SCREEN_WIDTH_RATIO / 2 - range / 2, range);
         }
 
+        if (gameField.getChoosingPosition() != null) {
+            Point blockPosition = Utility.getTopLeftPositionOfBlock(gameField.getChoosingPosition());
+            graphicsContext.strokeRect(blockPosition.getX(), blockPosition.getY(), Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO);
+        }
+
         graphicsContext.fillText("Coins: " + this.gameField.getRecentStage().getCoins(), 20, 20);
         graphicsContext.fillText("Health: " + this.gameField.getRecentStage().getHealth(), 20, 40);
         graphicsContext.fillText("Level: " + this.gameField.getRecentStage().getLevel(), 20, 60);

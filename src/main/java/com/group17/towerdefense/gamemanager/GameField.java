@@ -149,6 +149,7 @@ public class GameField {
         if (this.getChoosingPosition() == null) return;
         Point fieldPosition = Utility.fromScreenPointToFieldPoint(this.getChoosingPosition());
         this.setRemoveTowerPosition(fieldPosition);
+        this.setChoosingPosition(null);
     }
 
     public void setRemoveTowerPosition(Point position) {

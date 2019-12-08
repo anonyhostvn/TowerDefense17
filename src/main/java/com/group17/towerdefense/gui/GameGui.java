@@ -43,7 +43,8 @@ public class GameGui {
     {
         selectMap.getItems().addAll(
                 Config.mapNameConst.get("HANOI"),
-                Config.mapNameConst.get("HCM")
+                Config.mapNameConst.get("HCM"),
+                Config.mapNameConst.get("HP")
         );
         selectMap.setValue(Config.mapNameConst.get("HANOI"));
     }
@@ -102,6 +103,22 @@ public class GameGui {
         this.choosingPosition = null;
 
         initGame();
+    }
+
+    private Button muteBgSoundButton() {
+        Button muteBtn = new Button("Mute sound");
+        muteBtn.setOnAction((e) -> {
+            gameController.muteBgSound();
+        });
+        return muteBtn;
+    }
+
+    private Button unMuteBgSoundButton() {
+        Button muteBtn = new Button("Turn on sound");
+        muteBtn.setOnAction((e) -> {
+            gameController.unMuteBgSound();
+        });
+        return muteBtn;
     }
 
     private Button stopButton() {
@@ -222,6 +239,8 @@ public class GameGui {
         gridPane.add(DRocketTower(), 1, 7, 1, 1);
         gridPane.add(activeMapButton(), 0, 8, 1, 1);
         gridPane.add(selectMap, 1, 8 , 1, 1);
+        gridPane.add(muteBgSoundButton(), 0, 9 , 1 , 1);
+        gridPane.add(unMuteBgSoundButton(), 1, 9 , 1 , 1);
         return gridPane;
     }
 

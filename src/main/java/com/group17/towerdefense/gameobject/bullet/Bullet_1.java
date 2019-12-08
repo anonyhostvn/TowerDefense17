@@ -8,11 +8,18 @@ import com.group17.towerdefense.repositories.entity.DestroyableEntity;
 import com.group17.towerdefense.repositories.entity.FireableSingleEntity;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 import com.group17.towerdefense.utility.Utility;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Bullet_1 extends AbstractBullet implements FireableSingleEntity {
     private GameEntity target;
 
+    private final Media soundFire = new Media(Bullet_1.class.getResource("/sound/gun.mp3").toString());
+    private final MediaPlayer soundFirePlayer = new MediaPlayer(soundFire);
+
     public Bullet_1(Point position, GameEntity target) {
+        soundFirePlayer.play();
+
         this.width = Config.BULLET_1_WIDTH;
         this.height = Config.BULLET_1_HEIGHT;
         this.absVelocity = Config.BULLET_1_ABS_VELOCITY;
