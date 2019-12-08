@@ -5,8 +5,7 @@ import com.group17.towerdefense.abstractfactory.AbstractEntityFactory;
 import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gameobject.enemy.AbstractAirEnemy;
 import com.group17.towerdefense.gameobject.enemy.AbstractGroundEnemy;
-import com.group17.towerdefense.gameobject.ground.Mountain;
-import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.ground.*;
 import com.group17.towerdefense.gameobject.spawner.AbstractSpawner;
 import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
 import com.group17.towerdefense.mesurement.Point;
@@ -37,6 +36,15 @@ public class GameField {
             for (int j = 0; j < gameStage.getWidth(); j++)
                 if (gameStage.getMapIn(i,j) == GameFlag.MOUNTAIN) {
                     allGameEntity.add(new Mountain(j * Config.SCREEN_HEIGHT_RATIO,i *  Config.SCREEN_WIDTH_RATIO,  Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
+
+                    double rate = Math.random();
+                    if (rate <= 0.02)
+                        allGameEntity.add(new RockOnes(Utility.fromFieldPointToScreenPoint(new Point(j,i)), Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
+                    else if (rate <= 0.03){
+                        allGameEntity.add(new RockTwo(Utility.fromFieldPointToScreenPoint(new Point(j,i)), Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
+                    } else if (rate <= 0.06) {
+                        allGameEntity.add(new BushOne(Utility.fromFieldPointToScreenPoint(new Point(j,i)), Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
+                    }
                 } else {
                     allGameEntity.add(new Road(j * Config.SCREEN_HEIGHT_RATIO, i * Config.SCREEN_WIDTH_RATIO, Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO));
                 }

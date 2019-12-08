@@ -2,8 +2,7 @@ package com.group17.towerdefense;
 
 import com.group17.towerdefense.gameobject.bullet.*;
 import com.group17.towerdefense.gameobject.enemy.*;
-import com.group17.towerdefense.gameobject.ground.Mountain;
-import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.ground.*;
 import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
 import com.group17.towerdefense.gameobject.tower.*;
 import com.group17.towerdefense.repositories.entity.GameEntity;
@@ -130,6 +129,10 @@ public final class Config {
     public static final Map<Class<? extends GameEntity>, Integer> entityOrder = new HashMap<Class<? extends GameEntity>, Integer>(Map.ofEntries(
             Map.entry(Mountain.class, 1),
             Map.entry(Road.class, 2),
+            Map.entry(RockOnes.class, 2),
+            Map.entry(RockTwo.class, 2),
+            Map.entry(BushOne.class, 2),
+
             Map.entry(SampleEnemy.class, 3),
             Map.entry(SampleTower.class, 4),
             Map.entry(SampleSpawner.class, 5),
@@ -140,12 +143,10 @@ public final class Config {
             Map.entry(SRocketTower.class, 9),
             Map.entry(DRocketTower.class, 10),
 
-
-            Map.entry(PlaneEnemy.class, 11),
-            Map.entry(JetPlaneEnemy.class, 12),
-            Map.entry(TankerEnemy.class, 13),
-            Map.entry(BossEnemy.class, 14),
-
+            Map.entry(TankerEnemy.class, 11),
+            Map.entry(BossEnemy.class, 12),
+            Map.entry(PlaneEnemy.class, 13),
+            Map.entry(JetPlaneEnemy.class, 14),
 
             Map.entry(Bullet_1.class, 15),
             Map.entry(Bullet_2.class, 16),

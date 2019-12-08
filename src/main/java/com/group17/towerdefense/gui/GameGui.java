@@ -211,7 +211,7 @@ public class GameGui {
         gridPane.add(stopButton(), 1, 1, 2, 1);
         gridPane.add(restartButton(), 0, 3, 2, 1);
         gridPane.add(sellButton(), 1, 3, 3,1);
-        gridPane.add(sampleTower(), 0, 5, 2, 1);
+//        gridPane.add(sampleTower(), 0, 5, 2, 1);
         gridPane.add(SBarrelTower(), 0, 6, 1, 1);
         gridPane.add(DBarrelTower(), 1, 6, 1, 1);
         gridPane.add(SRocketTower(), 0, 7, 1, 1);

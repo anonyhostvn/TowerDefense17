@@ -4,8 +4,7 @@ import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gameobject.enemy.*;
 import com.group17.towerdefense.gameobject.bullet.*;
-import com.group17.towerdefense.gameobject.ground.Mountain;
-import com.group17.towerdefense.gameobject.ground.Road;
+import com.group17.towerdefense.gameobject.ground.*;
 import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
 import com.group17.towerdefense.gameobject.tower.*;
 import com.group17.towerdefense.graphic.*;
@@ -39,7 +38,10 @@ public class GraphicProcessor {
             Map.entry(SRocketTower.class, new SRocketTowerDrawer()),
             Map.entry(BigRocket.class, new BigRocketDrawer()),
             Map.entry(DRocketTower.class, new DRocketTowerDrawer()),
-            Map.entry(Rocket.class, new RocketDrawer())
+            Map.entry(Rocket.class, new RocketDrawer()),
+            Map.entry(RockOnes.class, new RockOnesDrawer()),
+            Map.entry(RockTwo.class, new RockTwoDrawer()),
+            Map.entry(BushOne.class, new BushOneDrawer())
     ));
 
     private final DrawerEntity hoverRectDrawer = new HoverRectangleDrawer();
@@ -50,7 +52,8 @@ public class GraphicProcessor {
     }
 
     public void render() {
-        graphicsContext.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+//        graphicsContext.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        graphicsContext.clearRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
 
         for (GameEntity gameEntity: gameField.getAllGameEntity()) {
             pairGraphics.get(gameEntity.getClass()).draw(graphicsContext, gameEntity.getPosX(), gameEntity.getPosY(), (int) gameEntity.getWidth(), (int) gameEntity.getHeight(), gameEntity.getAngle());
