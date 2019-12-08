@@ -35,7 +35,6 @@ public class GameStage {
                     int temp = scannerInp.nextInt();
                     if (temp == 0) map[i][j] = GameFlag.MOUNTAIN;
                     else map[i][j] = GameFlag.ROAD;
-//                  map[i][j] = scannerInp.nextInt();
                 }
             this.health = 5;
             this.coins = 100;
@@ -45,11 +44,6 @@ public class GameStage {
             turningPoints = new TurningPoint[cntTurningPoint];
             for (int i = 0; i < cntTurningPoint; i++) {
                 turningPoints[i] = new TurningPoint(new Point(scannerInp.nextInt(), scannerInp.nextInt()), scannerInp.nextInt());
-            }
-
-            System.out.println(mapName);
-            for (TurningPoint tp : turningPoints) {
-                tp.getPoint().print("Turning points :");
             }
 
             int cntEnemy = scannerInp.nextInt();
@@ -73,7 +67,7 @@ public class GameStage {
     }
 
     public GameFlag gameStatus(){
-        if (this.health > 0 && this.remainEnemy == 0) return GameFlag.LEVEL_UP;
+        if (this.health > 0 && this.remainEnemy == 0) return GameFlag.GAME_WIN;
         else if (this.health <= 0) return GameFlag.GAME_LOOSE;
         return GameFlag.GAME_CONTINUE;
     }

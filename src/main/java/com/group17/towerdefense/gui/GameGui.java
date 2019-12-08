@@ -12,7 +12,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -134,6 +133,7 @@ public class GameGui {
         sampleTowerBtn.setOnMouseClicked((e) -> {
             this.choosingTower = GameFlag.SAMPLE_TOWER;
             this.gameController.getGameField().setIsChooseATower(true);
+            this.gameController.getGameField().setRecentHoverRange(Config.SAMPLE_TOWER_RANGE);
         });
         return sampleTowerBtn;
     }
@@ -144,6 +144,7 @@ public class GameGui {
         SBarrelTowerBtn.setOnMouseClicked((e) -> {
             this.choosingTower = GameFlag.SINGLE_BARREL_TOWER;
             this.gameController.getGameField().setIsChooseATower(true);
+            this.gameController.getGameField().setRecentHoverRange(Config.SINGLE_BARREL_TOWER_RANGE);
         });
         return SBarrelTowerBtn;
     }
@@ -154,6 +155,7 @@ public class GameGui {
         DBarrelTowerBtn.setOnMouseClicked((e) -> {
             this.choosingTower = GameFlag.DOUBLE_BARREL_TOWER;
             this.gameController.getGameField().setIsChooseATower(true);
+            this.gameController.getGameField().setRecentHoverRange(Config.DOUBLE_BARREL_TOWER_RANGE);
         });
         return DBarrelTowerBtn;
     }
@@ -164,6 +166,7 @@ public class GameGui {
         SRocketTowerBtn.setOnMouseClicked((e) -> {
             this.choosingTower = GameFlag.SINGLE_ROCKET_TOWER;
             this.gameController.getGameField().setIsChooseATower(true);
+            this.gameController.getGameField().setRecentHoverRange(Config.SINGLE_ROCKET_TOWER_RANGE);
         });
         return SRocketTowerBtn;
     }
@@ -174,6 +177,7 @@ public class GameGui {
         DRocketTowerBtn.setOnMouseClicked((e) -> {
             this.choosingTower = GameFlag.DOUBLE_ROCKET_TOWER;
             this.gameController.getGameField().setIsChooseATower(true);
+            this.gameController.getGameField().setRecentHoverRange(Config.DOUBLE_ROCKET_TOWER_RANGE);
         });
         return DRocketTowerBtn;
     }
@@ -206,7 +210,7 @@ public class GameGui {
         gridPane.setVgap(10);
 
         gridPane.setPadding(new Insets(10, 10, 10 , 10));
-        gridPane.add(textField("Tower defend 17"), 0, 0, 2, 1);
+        gridPane.add(textField("Tower defense 17"), 0, 0, 2, 1);
         gridPane.add(startButton(), 0, 1, 2, 1);
         gridPane.add(stopButton(), 1, 1, 2, 1);
         gridPane.add(restartButton(), 0, 3, 2, 1);

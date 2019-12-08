@@ -45,6 +45,7 @@ public class GraphicProcessor {
     ));
 
     private final DrawerEntity hoverRectDrawer = new HoverRectangleDrawer();
+    private final RangeDrawer rangeDrawer = new RangeDrawer();
 
     public GraphicProcessor(GraphicsContext graphicsContext, GameField gameField) {
         this.graphicsContext = graphicsContext;
@@ -52,16 +53,17 @@ public class GraphicProcessor {
     }
 
     public void render() {
-//        graphicsContext.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        graphicsContext.clearRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        graphicsContext.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
 
         for (GameEntity gameEntity: gameField.getAllGameEntity()) {
             pairGraphics.get(gameEntity.getClass()).draw(graphicsContext, gameEntity.getPosX(), gameEntity.getPosY(), (int) gameEntity.getWidth(), (int) gameEntity.getHeight(), gameEntity.getAngle());
         }
 
+        final double range = gameField.getRecentHoverRange() * 2;
         if (this.gameField.getIsChooseATower() && this.gameField.getRecentMousePosition() != null) {
             Point drawerPosition = Utility.getTopLeftPositionOfBlock(gameField.getRecentMousePosition());
             hoverRectDrawer.draw(graphicsContext, drawerPosition.getX(), drawerPosition.getY(), Config.SCREEN_WIDTH_RATIO, Config.SCREEN_HEIGHT_RATIO, 0);
+            rangeDrawer.draw(graphicsContext, drawerPosition.getX() + Config.SCREEN_HEIGHT_RATIO/ 2  - range / 2, drawerPosition.getY() + Config.SCREEN_WIDTH_RATIO / 2 - range / 2, range);
         }
 
         graphicsContext.fillText("Coins: " + this.gameField.getRecentStage().getCoins(), 20, 20);

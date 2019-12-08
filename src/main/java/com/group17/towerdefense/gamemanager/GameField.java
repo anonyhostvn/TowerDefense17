@@ -16,7 +16,7 @@ import java.util.*;
 
 public class GameField {
     private GameStage recentStage;
-    private Queue<GameEntity> allGameEntity;
+    private ArrayList<GameEntity> allGameEntity;
     private List<GameEntity> addingGameEntity;
     private AbstractEntityFactory entityFactory;
     private AbstractSpawner recentSpawner;
@@ -24,12 +24,13 @@ public class GameField {
     private boolean isChooseATower;
     private Point choosingPosition;
     private Point removeTowerPosition = null;
+    private double recentHoverRange = 0;
 
     private long ticks;
 
     public GameField(GameStage gameStage) {
         ticks = 0;
-        allGameEntity = new PriorityQueue<GameEntity>(Config::entityOrderComparator);
+        allGameEntity = new ArrayList<GameEntity>();
         this.recentStage = gameStage;
 
         for (int i = 0; i < gameStage.getHeight(); i++)
@@ -84,6 +85,7 @@ public class GameField {
 
         checkEnemyReachGoal();
 
+
         ArrayList<GameEntity> removeList = new ArrayList<GameEntity>();
         for (GameEntity gameEntity: allGameEntity) if (!gameEntity.isExist()) {
             if (
@@ -99,6 +101,8 @@ public class GameField {
         allGameEntity.addAll(addingGameEntity);
 
         addingGameEntity.clear();
+
+        Collections.sort(this.allGameEntity, Config::entityOrderComparator);
     }
 
     public void setRecentMousePosition(Point position) {
@@ -121,7 +125,7 @@ public class GameField {
         addingGameEntity.add(gameEntity);
     }
 
-    public Queue<GameEntity> getAllGameEntity() {
+    public ArrayList<GameEntity> getAllGameEntity() {
         return allGameEntity;
     }
 
@@ -154,6 +158,9 @@ public class GameField {
     public Point getRemoveTowerPosition() {
         return this.removeTowerPosition;
     }
+
+    public double getRecentHoverRange() {return this.recentHoverRange ;}
+    public void setRecentHoverRange(double recentHoverRange) {this.recentHoverRange = recentHoverRange; }
 
     public void createNewTower(Point fieldPoint, GameFlag tower) {
         this.setChoosingPosition(null);

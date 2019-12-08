@@ -14,7 +14,7 @@ public abstract class AbstractTower implements GameTile, AttackableEntity {
 
     protected int level = 0;
     protected boolean isExist = true;
-    protected long countingFrame = 0;
+    protected long countingFrame = Integer.MAX_VALUE;
     protected final int width = Config.SCREEN_WIDTH_RATIO;
     protected final int height = Config.SCREEN_HEIGHT_RATIO;
 

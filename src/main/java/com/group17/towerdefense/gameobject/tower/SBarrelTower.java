@@ -21,6 +21,13 @@ public class SBarrelTower extends AbstractTower{
     private final double damage = Config.BULLET_1_DAMAGE;
     private final double frameGap = Config.SINGLE_BARREL_TOWER_FRAME_GAP;
     private GameEntity targetObj = null;
+    private final ArrayList<Class<? extends GameEntity>> targetClass = new ArrayList<Class<? extends GameEntity>>(
+            List.of(
+                    SampleEnemy.class,
+                    TankerEnemy.class,
+                    BossEnemy.class
+            )
+    );
 
     public SBarrelTower(Point fieldPoint, GameField gameField) {
         this.fieldPoint = new Point(fieldPoint);
@@ -39,13 +46,7 @@ public class SBarrelTower extends AbstractTower{
 
     @Override
     public ArrayList<Class<? extends GameEntity>> getTargetClass() {
-        return new ArrayList<Class<? extends GameEntity>>(
-                List.of(
-                        SampleEnemy.class,
-                        TankerEnemy.class,
-                        BossEnemy.class
-                )
-        );
+        return targetClass;
     }
 
     @Override
@@ -57,14 +58,16 @@ public class SBarrelTower extends AbstractTower{
         for (GameEntity gameEntity : this.gameField.getAllGameEntity())
             if (this.getTargetClass().contains(gameEntity.getClass())){
                 double distance = Utility.calculateDistance(this, gameEntity);
-                if (distance < this.getRange() && minRange > this.getRange()) {
+                if (distance < this.getRange() && minRange > distance) {
                     minRange = distance;
                     targetObj = gameEntity;
                 }
             }
 
-        if (targetObj != null)
+        if (targetObj != null){
+            countingFrame = 0;
             this.gameField.addEntity(new Bullet_1(new Point(getPosX(), getPosY()), targetObj));
+        }
     }
 
     @Override
@@ -78,11 +81,10 @@ public class SBarrelTower extends AbstractTower{
 
     @Override
     public void doUpdate(long tick) {
-        this.countingFrame ++;
+        if (countingFrame < frameGap) this.countingFrame += 2;
         if (countingFrame >= frameGap) {
             doAttack();
-            countingFrame = 0;
-        } else countingFrame ++;
+        }
 
         if (this.gameField.getRemoveTowerPosition() != null && this.gameField.getRemoveTowerPosition().equal(this.fieldPoint)) {
             this.isExist = false;
