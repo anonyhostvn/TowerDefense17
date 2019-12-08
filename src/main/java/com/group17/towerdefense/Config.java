@@ -8,6 +8,7 @@ import com.group17.towerdefense.gameobject.spawner.SampleSpawner;
 import com.group17.towerdefense.gameobject.tower.*;
 import com.group17.towerdefense.repositories.entity.GameEntity;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -112,6 +113,11 @@ public final class Config {
             Map.entry(Bullet_2.class, 12),
             Map.entry(Rocket.class, 13),
             Map.entry(BigRocket.class, 14)
+    ));
+
+    public static final Map<String, String> mapNameConst = new HashMap<String, String>(Map.ofEntries(
+            new AbstractMap.SimpleEntry<String, String>("HANOI", "Hà Nội"),
+            new AbstractMap.SimpleEntry<String, String>("HCM", "TP.HCM")
     ));
 
 

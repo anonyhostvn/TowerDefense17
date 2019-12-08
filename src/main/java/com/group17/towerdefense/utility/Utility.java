@@ -41,16 +41,27 @@ public class Utility {
         return imgView.snapshot(params, null);
     }
 
+//    public static void modifyVectorVelocity(TurningPoint[] listCheckPoint, Point recentPoint, MovableEntity target) {
+//        Point fieldPoint = fromScreenPointToFieldPoint(new Point(target.getPosX(), target.getPosY()));
+//        Point centerPoint = new Point (
+//                fieldPoint.getX() * Config.SCREEN_WIDTH_RATIO + Config.SCREEN_WIDTH_RATIO / 2,
+//                fieldPoint.getY() * Config.SCREEN_HEIGHT_RATIO + Config.SCREEN_HEIGHT_RATIO / 2
+//        );
+//
+//
+//        for (TurningPoint turningPoint: listCheckPoint) {
+//            if (fieldPoint.lengthTo(turningPoint.getPoint()) <= 1){
+//                PolarVector temp = new PolarVector(target.getAbsVelocity(),Math.toRadians(turningPoint.getAngle()));
+//                target.setVectorVelocity(new DescartesVector(temp));
+//            }
+//        }
+//    }
     public static void modifyVectorVelocity(TurningPoint[] listCheckPoint, Point recentPoint, MovableEntity target) {
-        Point fieldPoint = fromScreenPointToFieldPoint(new Point(target.getPosX(), target.getPosY()));
-        Point centerPoint = new Point (
-                fieldPoint.getX() * Config.SCREEN_WIDTH_RATIO + Config.SCREEN_WIDTH_RATIO / 2,
-                fieldPoint.getY() * Config.SCREEN_HEIGHT_RATIO + Config.SCREEN_HEIGHT_RATIO / 2
-        );
-
+        Point position = new Point(target.getPosX(), target.getPosY());
 
         for (TurningPoint turningPoint: listCheckPoint) {
-            if (fieldPoint.lengthTo(turningPoint.getPoint()) <= 1){
+            Point fieldTurning = fromFieldPointToScreenPoint(turningPoint.getPoint());
+            if (fieldTurning.lengthTo(position) <= 0.5){
                 PolarVector temp = new PolarVector(target.getAbsVelocity(),Math.toRadians(turningPoint.getAngle()));
                 target.setVectorVelocity(new DescartesVector(temp));
             }

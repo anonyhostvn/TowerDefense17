@@ -34,9 +34,9 @@ public class Controller extends AnimationTimer {
     private ScheduledFuture<?> scheduledFuture;
 
 
-    public Controller(GraphicsContext graphicsContext) {
+    public Controller(GraphicsContext graphicsContext, String mapName) {
         this.graphicsContext = graphicsContext;
-        gameStage = new GameStage();
+        gameStage = new GameStage(mapName);
         gameField = new GameField(gameStage);
         graphicProcessor = new GraphicProcessor(graphicsContext, gameField);
 

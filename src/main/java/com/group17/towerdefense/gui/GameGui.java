@@ -11,6 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +25,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.*;
+
 public class GameGui {
     private Controller gameController;
     private HBox GUILayout;
@@ -32,6 +36,18 @@ public class GameGui {
     private Canvas canvas;
     private GraphicsContext graphicsContext;
     private Stage windowStage;
+    private String mapName = "HANOI";
+
+
+    // CHOOSE MAP FIELD
+    ComboBox selectMap = new ComboBox();
+    {
+        selectMap.getItems().addAll(
+                Config.mapNameConst.get("HANOI"),
+                Config.mapNameConst.get("HCM")
+        );
+        selectMap.setValue(Config.mapNameConst.get("HANOI"));
+    }
 
     // SAMPLE TOWER
     private static final Image sampleTowerImage = new Image(RoadDrawer.class.getResourceAsStream("/Retina/towerDefense_tile249.png"));
@@ -170,28 +186,44 @@ public class GameGui {
         return sampleTowerBtn;
     }
 
+    private Button activeMapButton() {
+        Button activeMapBtn = new Button("Active map");
+        activeMapBtn.setOnMouseClicked(e -> {
+            String chooseValue = selectMap.getValue().toString();
+            for (Map.Entry<String, String> entry : Config.mapNameConst.entrySet()) {
+                String key = entry.getKey();
+                String val = entry.getValue();
+                if (chooseValue.compareTo(val) == 0) this.mapName = key;
+            }
+            initGame();
+        });
+        return activeMapBtn;
+    }
+
     private GridPane gridLayout() {
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
         gridPane.setPadding(new Insets(10, 10, 10 , 10));
-        gridPane.add(titleText(), 0, 0, 2, 1);
+        gridPane.add(textField("Tower defend 17"), 0, 0, 2, 1);
         gridPane.add(startButton(), 0, 1, 2, 1);
-        gridPane.add(stopButton(), 0, 2, 2, 1);
+        gridPane.add(stopButton(), 1, 1, 2, 1);
         gridPane.add(restartButton(), 0, 3, 2, 1);
-        gridPane.add(sellButton(), 0, 4, 3,1);
+        gridPane.add(sellButton(), 1, 3, 3,1);
         gridPane.add(sampleTower(), 0, 5, 2, 1);
         gridPane.add(SBarrelTower(), 0, 6, 1, 1);
         gridPane.add(DBarrelTower(), 1, 6, 1, 1);
         gridPane.add(SRocketTower(), 0, 7, 1, 1);
         gridPane.add(DRocketTower(), 1, 7, 1, 1);
+        gridPane.add(activeMapButton(), 0, 8, 1, 1);
+        gridPane.add(selectMap, 1, 8 , 1, 1);
         return gridPane;
     }
 
-    private Text titleText() {
+    private Text textField(String str) {
         Text text = new Text();
-        text.setText("Tower Defense");
+        text.setText(str);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         return text;
     }
@@ -217,7 +249,7 @@ public class GameGui {
     private void initGame() {
         canvas = new Canvas(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         graphicsContext = canvas.getGraphicsContext2D();
-        gameController = new Controller(graphicsContext);
+        gameController = new Controller(graphicsContext, mapName);
 
         canvas.setOnMouseClicked(this::handleClickEvent);
         canvas.setOnMouseMoved((e) -> {

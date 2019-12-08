@@ -19,9 +19,9 @@ public class GameStage {
 
     private int health, coins;
 
-    public GameStage() {
+    public GameStage(String mapName) {
         try {
-            final InputStream inpStream = getClass().getClassLoader().getResourceAsStream("./map-info.txt");
+            final InputStream inpStream = getClass().getClassLoader().getResourceAsStream("./map-info-" + mapName + ".txt");
 
             Scanner scannerInp = new Scanner(inpStream);
 
@@ -44,6 +44,11 @@ public class GameStage {
             turningPoints = new TurningPoint[cntTurningPoint];
             for (int i = 0; i < cntTurningPoint; i++) {
                 turningPoints[i] = new TurningPoint(new Point(scannerInp.nextInt(), scannerInp.nextInt()), scannerInp.nextInt());
+            }
+
+            System.out.println(mapName);
+            for (TurningPoint tp : turningPoints) {
+                tp.getPoint().print("Turning points :");
             }
 
             int cntEnemy = scannerInp.nextInt();
