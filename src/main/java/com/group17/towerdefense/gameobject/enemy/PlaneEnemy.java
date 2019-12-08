@@ -4,7 +4,6 @@ import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.mesurement.DescartesVector;
 import com.group17.towerdefense.mesurement.Point;
-import com.group17.towerdefense.utility.Utility;
 
 public class PlaneEnemy extends AbstractAirEnemy {
     public PlaneEnemy (Point position, GameField gameField) {
@@ -26,11 +25,5 @@ public class PlaneEnemy extends AbstractAirEnemy {
     @Override
     public void doUpdate(long tick) {
         this.doMove();
-    }
-
-    @Override
-    public void doMove() {
-        Utility.modifyVectorVelocity(this.recentGameField.getRecentStage().getTurningPoints(), this.position, this);
-        this.position = new Point(getPosX() + getVectorVelocity().getX(), getPosY() + getVectorVelocity().getY());
     }
 }

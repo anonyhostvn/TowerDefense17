@@ -19,9 +19,9 @@ public class GameStage {
     private int health, coins;
     private int level;
 
-    public GameStage() {
+    public GameStage(String mapName) {
         try {
-            final InputStream inpStream = getClass().getClassLoader().getResourceAsStream("./map-info.txt");
+            final InputStream inpStream = getClass().getClassLoader().getResourceAsStream("./map-info-" + mapName + ".txt");
 
             Scanner scannerInp = new Scanner(inpStream);
 
@@ -45,6 +45,11 @@ public class GameStage {
             turningPoints = new TurningPoint[cntTurningPoint];
             for (int i = 0; i < cntTurningPoint; i++) {
                 turningPoints[i] = new TurningPoint(new Point(scannerInp.nextInt(), scannerInp.nextInt()), scannerInp.nextInt());
+            }
+
+            System.out.println(mapName);
+            for (TurningPoint tp : turningPoints) {
+                tp.getPoint().print("Turning points :");
             }
 
             int cntEnemy = scannerInp.nextInt();
@@ -90,6 +95,10 @@ public class GameStage {
     public boolean decreaseHealth() {
         this.health --;
         return this.health != 0;
+    }
+
+    public void sellTower(int x, int y) {
+        this.map[x][y] = GameFlag.MOUNTAIN;
     }
 
     public boolean isLose() {

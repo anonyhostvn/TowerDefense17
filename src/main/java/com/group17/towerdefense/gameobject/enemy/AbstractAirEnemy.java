@@ -6,8 +6,7 @@ import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.mesurement.PolarVector;
 import com.group17.towerdefense.repositories.entity.DestroyableEntity;
 import com.group17.towerdefense.repositories.entity.MovableEntity;
-
-import javax.security.auth.Destroyable;
+import com.group17.towerdefense.utility.Utility;
 
 public abstract class AbstractAirEnemy implements DestroyableEntity, MovableEntity {
     protected double absVelocity;
@@ -66,5 +65,11 @@ public abstract class AbstractAirEnemy implements DestroyableEntity, MovableEnti
     public double getAngle() {
         PolarVector polarVector = new PolarVector(this.vectorVelocity);
         return Math.toDegrees(polarVector.getFi());
+    }
+
+    @Override
+    public void doMove() {
+        Utility.modifyVectorVelocity(this.recentGameField.getRecentStage().getTurningPoints(), this.position, this);
+        this.position = new Point(getPosX() + getVectorVelocity().getX(), getPosY() + getVectorVelocity().getY());
     }
 }
