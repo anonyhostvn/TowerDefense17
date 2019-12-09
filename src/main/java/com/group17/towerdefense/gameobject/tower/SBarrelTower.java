@@ -3,7 +3,7 @@ package com.group17.towerdefense.gameobject.tower;
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.gameobject.bullet.AbstractBullet;
-import com.group17.towerdefense.gameobject.bullet.Bullet_1;
+import com.group17.towerdefense.gameobject.bullet.BulletOne;
 import com.group17.towerdefense.gameobject.enemy.BossEnemy;
 import com.group17.towerdefense.gameobject.enemy.SampleEnemy;
 import com.group17.towerdefense.gameobject.enemy.TankerEnemy;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SBarrelTower extends AbstractTower{
-    private final Class<? extends AbstractBullet> ownBulletClass = Bullet_1.class;
+    private final Class<? extends AbstractBullet> ownBulletClass = BulletOne.class;
     private final double range = Config.SINGLE_BARREL_TOWER_RANGE;
     private final double damage = Config.BULLET_1_DAMAGE;
     private final double frameGap = Config.SINGLE_BARREL_TOWER_FRAME_GAP;
@@ -66,7 +66,7 @@ public class SBarrelTower extends AbstractTower{
 
         if (targetObj != null){
             countingFrame = 0;
-            this.gameField.addEntity(new Bullet_1(new Point(getPosX(), getPosY()), targetObj));
+            this.gameField.addEntity(this.gameField.getEntityFactory().createBulletFactory().createBulletOneFactory(new Point(getPosX(), getPosY()), targetObj));
         }
     }
 

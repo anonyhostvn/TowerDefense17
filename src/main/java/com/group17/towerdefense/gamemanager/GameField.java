@@ -25,6 +25,7 @@ public class GameField {
     private Point choosingPosition;
     private Point removeTowerPosition = null;
     private double recentHoverRange = 0;
+    private boolean isMuteSoundEffect = false;
 
     private long ticks;
 
@@ -163,6 +164,10 @@ public class GameField {
     public double getRecentHoverRange() {return this.recentHoverRange ;}
     public void setRecentHoverRange(double recentHoverRange) {this.recentHoverRange = recentHoverRange; }
 
+    public AbstractEntityFactory getEntityFactory() {
+        return this.entityFactory;
+    }
+
     public void createNewTower(Point fieldPoint, GameFlag tower) {
         this.setChoosingPosition(null);
         int X = (int) fieldPoint.getX(), Y = (int) fieldPoint.getY();
@@ -200,4 +205,7 @@ public class GameField {
             }
         }
     }
+
+    public void setIsMuteSoundEffect(boolean isMuteSoundEffect) {this.isMuteSoundEffect = isMuteSoundEffect;}
+    public boolean getIsMuteSoundEffect() {return this.isMuteSoundEffect;}
 }

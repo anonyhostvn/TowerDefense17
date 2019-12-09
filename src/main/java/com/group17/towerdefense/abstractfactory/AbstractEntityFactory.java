@@ -14,4 +14,6 @@ public class AbstractEntityFactory {
     }
 
     public TowerFactory createTowerFactory() {return new TowerFactory(this.recentGameField);}
+
+    public BulletFactory createBulletFactory() {return new BulletFactory(this.recentGameField);}
 }

@@ -3,7 +3,7 @@ package com.group17.towerdefense.gameobject.tower;
 import com.group17.towerdefense.Config;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.gameobject.bullet.AbstractBullet;
-import com.group17.towerdefense.gameobject.bullet.Bullet_2;
+import com.group17.towerdefense.gameobject.bullet.BulletTwo;
 import com.group17.towerdefense.gameobject.enemy.*;
 import com.group17.towerdefense.mesurement.Point;
 import com.group17.towerdefense.mesurement.PolarVector;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBarrelTower extends AbstractTower{
-    private final Class<? extends AbstractBullet> ownBulletClass = Bullet_2.class;
+    private final Class<? extends AbstractBullet> ownBulletClass = BulletTwo.class;
     private final double range = Config.DOUBLE_BARREL_TOWER_RANGE;
     private final double damage = Config.BULLET_2_DAMAGE;
     private final double frameGap = Config.DOUBLE_BARREL_TOWER_FRAME_GAP;
@@ -63,7 +63,7 @@ public class DBarrelTower extends AbstractTower{
             }
 
         if (targetObj != null){
-            this.gameField.addEntity(new Bullet_2(new Point(getPosX(), getPosY()), targetObj));
+            this.gameField.addEntity(this.gameField.getEntityFactory().createBulletFactory().createBulletTwoFactory(new Point(getPosX(), getPosY()), targetObj));
             countingFrame = 0;
         }
     }

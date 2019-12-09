@@ -64,7 +64,7 @@ public class SRocketTower extends AbstractTower{
 
         if (targetObj != null){
             countingFrame = 0;
-            this.gameField.addEntity(new BigRocket(new Point(getPosX(), getPosY()), targetObj));
+            this.gameField.addEntity(this.gameField.getEntityFactory().createBulletFactory().createBigRocketFactory(new Point(getPosX(), getPosY()), targetObj));
         }
     }
 

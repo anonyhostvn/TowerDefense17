@@ -106,7 +106,7 @@ public class GameGui {
     }
 
     private Button muteBgSoundButton() {
-        Button muteBtn = new Button("Mute sound");
+        Button muteBtn = new Button("Mute background sound");
         muteBtn.setOnAction((e) -> {
             gameController.muteBgSound();
         });
@@ -114,9 +114,25 @@ public class GameGui {
     }
 
     private Button unMuteBgSoundButton() {
-        Button muteBtn = new Button("Turn on sound");
+        Button muteBtn = new Button("Turn on background sound");
         muteBtn.setOnAction((e) -> {
             gameController.unMuteBgSound();
+        });
+        return muteBtn;
+    }
+
+    private Button muteSoundEffectButton() {
+        Button muteBtn = new Button("Mute sound effect");
+        muteBtn.setOnAction((e) -> {
+            gameController.setIsMuteSoundEffect(true);
+        });
+        return muteBtn;
+    }
+
+    private Button unMuteSoundEffectButton() {
+        Button muteBtn = new Button("Turn on sound effect");
+        muteBtn.setOnAction((e) -> {
+            gameController.setIsMuteSoundEffect(false);
         });
         return muteBtn;
     }
@@ -232,7 +248,6 @@ public class GameGui {
         gridPane.add(stopButton(), 1, 1, 2, 1);
         gridPane.add(restartButton(), 0, 3, 2, 1);
         gridPane.add(sellButton(), 1, 3, 3,1);
-//        gridPane.add(sampleTower(), 0, 5, 2, 1);
         gridPane.add(SBarrelTower(), 0, 6, 1, 1);
         gridPane.add(DBarrelTower(), 1, 6, 1, 1);
         gridPane.add(SRocketTower(), 0, 7, 1, 1);
@@ -241,6 +256,8 @@ public class GameGui {
         gridPane.add(selectMap, 1, 8 , 1, 1);
         gridPane.add(muteBgSoundButton(), 0, 9 , 1 , 1);
         gridPane.add(unMuteBgSoundButton(), 1, 9 , 1 , 1);
+        gridPane.add(muteSoundEffectButton(), 0, 10 , 1 , 1);
+        gridPane.add(unMuteSoundEffectButton(), 1, 10 , 1 , 1);
         return gridPane;
     }
 

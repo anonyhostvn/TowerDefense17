@@ -148,8 +148,8 @@ public final class Config {
             Map.entry(PlaneEnemy.class, 13),
             Map.entry(JetPlaneEnemy.class, 14),
 
-            Map.entry(Bullet_1.class, 15),
-            Map.entry(Bullet_2.class, 16),
+            Map.entry(BulletOne.class, 15),
+            Map.entry(BulletTwo.class, 16),
             Map.entry(Rocket.class, 17),
             Map.entry(BigRocket.class, 18)
     ));

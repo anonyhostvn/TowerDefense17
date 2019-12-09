@@ -65,7 +65,7 @@ public class DRocketTower extends AbstractTower{
 
         if (targetObj != null){
             countingFrame = 0;
-            this.gameField.addEntity(new Rocket(new Point(getPosX(), getPosY()), targetObj));
+            this.gameField.addEntity(this.gameField.getEntityFactory().createBulletFactory().createRocketFactory(new Point(getPosX(), getPosY()), targetObj));
         }
     }
 

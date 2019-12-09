@@ -4,7 +4,6 @@ import com.group17.towerdefense.gameflag.GameFlag;
 import com.group17.towerdefense.gamemanager.GameField;
 import com.group17.towerdefense.gamemanager.GameStage;
 import com.group17.towerdefense.gamemanager.GraphicProcessor;
-import com.group17.towerdefense.gameobject.bullet.Bullet_1;
 import com.group17.towerdefense.utility.ThreadFactoryBuilder;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
@@ -68,6 +67,7 @@ public class Controller extends AnimationTimer {
 
     public void stopGame() {
         super.stop();
+        muteBgSound();
     }
 
     public void muteBgSound() {
@@ -93,4 +93,5 @@ public class Controller extends AnimationTimer {
         graphicProcessor.render();
     }
 
+    public void setIsMuteSoundEffect(boolean isMuteSoundEffect) {this.gameField.setIsMuteSoundEffect(isMuteSoundEffect);}
 }

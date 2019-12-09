@@ -11,18 +11,13 @@ import com.group17.towerdefense.utility.Utility;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-public class Bullet_1 extends AbstractBullet implements FireableSingleEntity {
+public class BulletTwo extends AbstractBullet implements FireableSingleEntity {
     private GameEntity target;
 
-    private final Media soundFire = new Media(Bullet_1.class.getResource("/sound/gun.mp3").toString());
-    private final MediaPlayer soundFirePlayer = new MediaPlayer(soundFire);
-
-    public Bullet_1(Point position, GameEntity target) {
-        soundFirePlayer.play();
-
-        this.width = Config.BULLET_1_WIDTH;
-        this.height = Config.BULLET_1_HEIGHT;
-        this.absVelocity = Config.BULLET_1_ABS_VELOCITY;
+    public BulletTwo(Point position, GameEntity target) {
+        this.width = Config.BULLET_2_WIDTH;
+        this.height = Config.BULLET_2_HEIGHT;
+        this.absVelocity = Config.BULLET_2_ABS_VELOCITY;
 
         this.position = new Point(position);
         this.target = target;
@@ -36,7 +31,7 @@ public class Bullet_1 extends AbstractBullet implements FireableSingleEntity {
 
     @Override
     public int getDamage() {
-        return Config.BULLET_1_DAMAGE;
+        return Config.BULLET_2_DAMAGE;
     }
 
     @Override
